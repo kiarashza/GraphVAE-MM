@@ -1,0 +1,114 @@
+/localhome/kzahirni/anaconda3/envs/rnn_vae_graph22/lib/python3.5/site-packages/sklearn/utils/fixes.py:313: FutureWarning: numpy not_equal will not check object identity in the future. The comparison did not return the same result as suggested by the identity (`is`)) and will change.
+  _nan_object_mask = _nan_object_array != _nan_object_array
+CUDA 1
+File name prefix GraphRNN_RNN_PTC_4_128_
+graph_validate_len 122.1
+graph_test_len 130.4
+total graph num: 100, training set: 80
+max number node: 210
+max/min number edge: 570; 165
+max previous node: 10
+train and test graphs saved at:  ./graphs/crossEntropy_bestLR001_GraphRNN_RNN_PTC_4_128_test_0.dat
+/local-scratch/kia/remote_c/model.py:299: UserWarning: nn.init.xavier_uniform is now deprecated in favor of nn.init.xavier_uniform_.
+  nn.init.xavier_uniform(param,gain=nn.init.calculate_gain('sigmoid'))
+/local-scratch/kia/remote_c/model.py:297: UserWarning: nn.init.constant is now deprecated in favor of nn.init.constant_.
+  nn.init.constant(param, 0.25)
+/local-scratch/kia/remote_c/model.py:302: UserWarning: nn.init.xavier_uniform is now deprecated in favor of nn.init.xavier_uniform_.
+  m.weight.data = init.xavier_uniform(m.weight.data, gain=nn.init.calculate_gain('relu'))
+/local-scratch/kia/remote_c/train.py:591: UserWarning: invalid index of a 0-dim tensor. This will be an error in PyTorch 0.5. Use tensor.item() to convert a 0-dim tensor to a Python number
+  log_value('loss_'+args.fname, loss.data[0], epoch*args.batch_ratio+batch_idx)
+/local-scratch/kia/remote_c/train.py:593: UserWarning: invalid index of a 0-dim tensor. This will be an error in PyTorch 0.5. Use tensor.item() to convert a 0-dim tensor to a Python number
+  loss_sum += loss.data[0]*feature_dim
+/local-scratch/kia/remote_c/train.py:588: UserWarning: invalid index of a 0-dim tensor. This will be an error in PyTorch 0.5. Use tensor.item() to convert a 0-dim tensor to a Python number
+  epoch, args.epochs,loss.data[0], args.graph_type, args.num_layers, args.hidden_size_rnn))
+Epoch: 100/3000, train loss: 0.131787, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -57.531397581100464
+test done, graphs saved
+Epoch: 200/3000, train loss: 0.111071, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.04612994194031
+test done, graphs saved
+Epoch: 300/3000, train loss: 0.111646, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.16021275520325
+test done, graphs saved
+Epoch: 400/3000, train loss: 0.085677, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.432666540145874
+test done, graphs saved
+Epoch: 500/3000, train loss: 0.089743, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.69126749038696
+test done, graphs saved
+Epoch: 600/3000, train loss: 0.083915, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.33027529716492
+test done, graphs saved
+Epoch: 700/3000, train loss: 0.085369, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.48723602294922
+test done, graphs saved
+Epoch: 800/3000, train loss: 0.081445, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.1848840713501
+test done, graphs saved
+Epoch: 900/3000, train loss: 0.078477, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.17394304275513
+test done, graphs saved
+Epoch: 1000/3000, train loss: 0.076540, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.36379432678223
+test done, graphs saved
+Epoch: 1100/3000, train loss: 0.073782, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.42847013473511
+test done, graphs saved
+Epoch: 1200/3000, train loss: 0.073293, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.23894667625427
+test done, graphs saved
+Epoch: 1300/3000, train loss: 0.059528, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.95065784454346
+test done, graphs saved
+Epoch: 1400/3000, train loss: 0.063473, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.29643630981445
+test done, graphs saved
+Epoch: 1500/3000, train loss: 0.062935, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.34550380706787
+test done, graphs saved
+Epoch: 1600/3000, train loss: 0.063670, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.03483533859253
+test done, graphs saved
+Epoch: 1700/3000, train loss: 0.055227, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.22607922554016
+test done, graphs saved
+Epoch: 1800/3000, train loss: 0.060702, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.455758571624756
+test done, graphs saved
+Epoch: 1900/3000, train loss: 0.062005, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.489991903305054
+test done, graphs saved
+Epoch: 2000/3000, train loss: 0.058640, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.150224924087524
+test done, graphs saved
+Epoch: 2100/3000, train loss: 0.052389, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.31491947174072
+test done, graphs saved
+Epoch: 2200/3000, train loss: 0.053997, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.20600748062134
+test done, graphs saved
+Epoch: 2300/3000, train loss: 0.055670, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.206743478775024
+test done, graphs saved
+Epoch: 2400/3000, train loss: 0.053358, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.15841817855835
+test done, graphs saved
+Epoch: 2500/3000, train loss: 0.053029, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.03173589706421
+test done, graphs saved
+Epoch: 2600/3000, train loss: 0.053567, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -52.68723940849304
+test done, graphs saved
+Epoch: 2700/3000, train loss: 0.046704, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.1764976978302
+test done, graphs saved
+Epoch: 2800/3000, train loss: 0.055531, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.02647686004639
+test done, graphs saved
+Epoch: 2900/3000, train loss: 0.048764, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.12665033340454
+test done, graphs saved
+Epoch: 3000/3000, train loss: 0.051829, graph type: PTC, num_layer: 4, hidden: 128
+generation time: -51.211676597595215
+test done, graphs saved
+Train Time:  17810.919582618983
