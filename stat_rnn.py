@@ -619,8 +619,10 @@ if __name__ == '__main__':
     models.append([None, pred_fname, "lobster"])
 
 
-
-
+#ReportedResult\PTC_result\BIGG\PTC_lattice_graph\test-graphs.pkl
+    models = []
+    test_fname = "ReportedResult/PTC_result/BIGG/PTC_lattice_graph/test.npy"
+    pred_fname = "ReportedResult/PTC_result/BIGG/PTC_lattice_graph/generated.npy"
 
     models.append([test_fname,pred_fname, None])
     #---------------------------------------------

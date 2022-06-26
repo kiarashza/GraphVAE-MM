@@ -30,8 +30,8 @@ parser.add_argument('-e', dest="epoch_number", default=20000, help="Number of Ep
 parser.add_argument('-v', dest="Vis_step", default=1000, help="at every Vis_step 'minibatch' the plots will be updated")
 parser.add_argument('-redraw', dest="redraw", default=False, help="either update the log plot each step")
 parser.add_argument('-lr', dest="lr", default=0.0003, help="model learning rate")
-parser.add_argument('-dataset', dest="dataset", default="triangular_grid",
-                    help="possible choices are:   wheel_graph, FIRSTMM_DB, star, triangular_grid, multi_community, NCI1, ogbg-molbbbp, IMDbMulti, grid, community, citeseer, lobster, DD")  # citeceer: ego; DD:protein
+parser.add_argument('-dataset', dest="dataset", default="PTC",
+                    help="possible choices are:   wheel_graph,PTC, FIRSTMM_DB, star, triangular_grid, multi_community, NCI1, ogbg-molbbbp, IMDbMulti, grid, community, citeseer, lobster, DD")  # citeceer: ego; DD:protein
 parser.add_argument('-graphEmDim', dest="graphEmDim", default=1024, help="the dimention of graph Embeding LAyer; z")
 parser.add_argument('-graph_save_path', dest="graph_save_path", default=None,
                     help="the direc to save generated synthatic graphs")
@@ -44,7 +44,7 @@ parser.add_argument('-encoder', dest="encoder_type", default="AvePool",
 parser.add_argument('-batchSize', dest="batchSize", default=200,
                     help="the size of each batch; the number of graphs is the mini batch")
 parser.add_argument('-UseGPU', dest="UseGPU", default=True, help="either use GPU or not if availabel")
-parser.add_argument('-model', dest="model", default="KernelAugmentedWithTotalNumberOfTriangles",
+parser.add_argument('-model', dest="model", default="kipf",
                     help="KernelAugmentedWithTotalNumberOfTriangles is the only option in this rep")
 parser.add_argument('-device', dest="device", default="cuda:0", help="Which device should be used")
 parser.add_argument('-task', dest="task", default="graphGeneration", help="only option in this rep is graphGeneration")
