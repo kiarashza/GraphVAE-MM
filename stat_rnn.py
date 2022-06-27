@@ -622,7 +622,7 @@ if __name__ == '__main__':
 #ReportedResult\PTC_result\BIGG\PTC_lattice_graph\test-graphs.pkl
     models = []
     test_fname = "ReportedResult/PTC_result/BIGG/PTC_lattice_graph/test.npy"
-    pred_fname = "ReportedResult/PTC_result/GRAN/GRAN_PTC_lattice_graph__gen_adj.npy"
+    pred_fname = "ReportedResult/PTC_result/GraphRNN/crossEntropy_bestLR001_GraphRNN_MLP_PTC_4_128_pred_3000_1.dat_nx22_"
 
     models.append([test_fname,pred_fname, None])
     #---------------------------------------------
@@ -659,7 +659,7 @@ if __name__ == '__main__':
 
             for i,G in enumerate(test_list_adj[:20]):
                 # G = nx.from_scipy_sparse_matrix(G)
-                plotter.plotG(G, "test",  file_name=model[1]+"_tst"+str(i)+".png")
+                plotter.plotG(G, "test",  file_name=model[1]+"__test__"+str(i)+".png")
 
         if(Visualize):
             import plotter
