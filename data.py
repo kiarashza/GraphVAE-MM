@@ -460,7 +460,7 @@ def list_graph_loader( graph_type, _max_list_size=None, return_labels=False):
       graphs_to_writeOnDisk = [gr.toarray() for gr in list_adj]
       np.save('PTC_lattice_graph.npy', graphs_to_writeOnDisk, allow_pickle=True)
 
-  if graph_type=="NCI1":
+  elif graph_type=="NCI1":
       data = dgl.data.GINDataset(name='NCI1', self_loop=False)
       graphs, labels = data.graphs, data.labels
       for i, graph in enumerate(graphs):
@@ -469,7 +469,7 @@ def list_graph_loader( graph_type, _max_list_size=None, return_labels=False):
           list_x.append(None)
           list_labels.append(labels[i].cpu().item())
 
-  if graph_type=="ogbg-molbbbp":
+  elif graph_type=="ogbg-molbbbp":
       # https://ogb.stanford.edu/docs/graphprop/
       from ogb.graphproppred import DglGraphPropPredDataset, collate_dgl
       d_name = "ogbg-molbbbp"  # ogbg-molhiv   'ogbg-code2' ogbg-ppa
@@ -488,17 +488,17 @@ def list_graph_loader( graph_type, _max_list_size=None, return_labels=False):
 
 
       # list_labels = [adj.sum() for adj in list_adj]
-  if graph_type=="large_grid":
+  elif graph_type=="large_grid":
       for i in range(10):
             list_adj.append(nx.adjacency_matrix(grid(30, 100)))
             list_x.append(None)
-  if graph_type=="grid":
+  elif graph_type=="grid":
       for i in range(10, 20):
         for j in range(10, 20):
             list_adj.append(nx.adjacency_matrix(grid(i, j)))
             list_x.append(None)
 
-  if graph_type=="triangular_grid":
+  elif graph_type=="triangular_grid":
       for i in range(10, 20):
         for j in range(10, 20):
             list_adj.append(nx.adjacency_matrix(nx.triangular_lattice_graph(i, j)))
@@ -506,39 +506,39 @@ def list_graph_loader( graph_type, _max_list_size=None, return_labels=False):
       graphs_to_writeOnDisk = [gr.toarray() for  gr in list_adj]
       np.save('triangular_lattice_graph.npy', graphs_to_writeOnDisk, allow_pickle=True)
 
-  if graph_type=="fancy_grid":
+  elif graph_type=="fancy_grid":
       for i in range(4, 8):
         for j in range(4, 8):
             list_adj.append(nx.adjacency_matrix(grid(i, j)))
       list_adj = padd_adj_to(list_adj, np.max(np.array([adj.shape[0] for adj in list_adj])))
       for adj in list_adj:
         list_x.append(node_festure_creator(adj, 3,10))
-  if graph_type == "tree":
+  elif graph_type == "tree":
       for graph_size in range(3, 83):
           list_x.append(None)
           list_adj.append(nx.adjacency_matrix(nx.random_tree(graph_size)))
 
-  if graph_type == "star":
+  elif graph_type == "star":
       for graph_size in range(3,83):
           list_x.append(None)
           list_adj.append(nx.adjacency_matrix(nx.star_graph(graph_size)))
 
-  if graph_type == "wheel_graph":
+  elif graph_type == "wheel_graph":
       for graph_size in range(3,83):
           list_x.append(None)
           list_adj.append(nx.adjacency_matrix(nx.wheel_graph(graph_size)))
-  if graph_type=="IMDbMulti":
+  elif graph_type=="IMDbMulti":
       list_adj = pkl.load(open("data/IMDbMulti/IMDBMulti.p",'rb'))
       list_x= [None for x in list_adj]
-  if graph_type=="one_grid":
+  elif graph_type=="one_grid":
         list_adj.append(nx.adjacency_matrix(grid(350, 10)))
         list_x.append(None)
-  if graph_type=="small_grid":
+  elif graph_type=="small_grid":
       for i in range(3, 6):
         for j in range(3, 6):
             list_adj.append(nx.adjacency_matrix(grid(i, j)))
             list_x.append(None)
-  if graph_type=="huge_grids":
+  elif graph_type=="huge_grids":
       for i in range(4, 10):
           for j in range(4, 10):
               list_adj.append(nx.adjacency_matrix(grid(i, j)))
@@ -810,6 +810,7 @@ def BFS_Permute( adj_s, x_s, target_kelrnel_val):
 
 
   return adj_s, x_s, target_kelrnel_val
+
 
 
 if __name__ == '__main__':
