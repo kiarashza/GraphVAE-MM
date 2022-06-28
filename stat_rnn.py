@@ -622,7 +622,9 @@ if __name__ == '__main__':
 #ReportedResult\PTC_result\BIGG\PTC_lattice_graph\test-graphs.pkl
     models = []
     test_fname = "ReportedResult/PTC_result/BIGG/PTC_lattice_graph/test.npy"
-    pred_fname = "ReportedResult/PTC_result/GraphRNN/crossEntropy_bestLR001_GraphRNN_RNN_PTC_4_128_pred_3000_1.dat_nx22_"
+    pred_fname = "ReportedResult/PTC_result/GraphRNN/crossEntropy_bestLR001_GraphRNN_RNN_PTC_4_128_pred_300_1.dat_nx22_"
+#    pred_fname = "ReportedResult/PTC_result/GraphRNN/crossEntropy_bestLR001_GraphRNN_RNN_PTC_4_128_pred_300_1.dat_nx22_"
+#>>>>>>> 54c3368b9101d4dd6056ed389dd3bbdede972d35
 
     models.append([test_fname,pred_fname, None])
     #---------------------------------------------
