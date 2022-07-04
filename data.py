@@ -448,8 +448,18 @@ def list_graph_loader( graph_type, _max_list_size=None, return_labels=False):
   list_x =[]
   list_labels = []
 
+  if graph_type=="IMDBBINARY":
+      data = dgl.data.GINDataset(name='IMDBBINARY', self_loop=False)
+      graphs, labels = data.graphs, data.labels
+      for i, graph in enumerate(graphs):
+          list_adj.append(csr_matrix(graph.adjacency_matrix().to_dense().numpy()))
+          # list_x.append(graph.ndata['feat'])
+          list_x.append(None)
+          list_labels.append(labels[i].cpu().item())
+      graphs_to_writeOnDisk = [gr.toarray() for gr in list_adj]
+      np.save('IMDBBINARY_lattice_graph.npy', graphs_to_writeOnDisk, allow_pickle=True)
 
-  if graph_type=="PTC":
+  elif graph_type=="PTC":
       data = dgl.data.GINDataset(name='PTC', self_loop=False)
       graphs, labels = data.graphs, data.labels
       for i, graph in enumerate(graphs):
@@ -814,7 +824,7 @@ def BFS_Permute( adj_s, x_s, target_kelrnel_val):
 
 
 if __name__ == '__main__':
-    result=list_graph_loader("PTC")
+    result=list_graph_loader("IMDBBINARY")
     import plotter
 
     for i, G in enumerate(result[0]):
