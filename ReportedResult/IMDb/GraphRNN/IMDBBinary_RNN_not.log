@@ -1,0 +1,114 @@
+/localhome/kzahirni/anaconda3/envs/rnn_vae_graph22/lib/python3.5/site-packages/sklearn/utils/fixes.py:313: FutureWarning: numpy not_equal will not check object identity in the future. The comparison did not return the same result as suggested by the identity (`is`)) and will change.
+  _nan_object_mask = _nan_object_array != _nan_object_array
+CUDA 1
+File name prefix GraphRNN_RNN_IMDBBINARY_4_128_
+graph_validate_len 20.29
+graph_test_len 19.125
+total graph num: 1000, training set: 800
+max number node: 136
+max/min number edge: 1249; 26
+max previous node: 10
+train and test graphs saved at:  ./graphs/crossEntropy_bestLR001_GraphRNN_RNN_IMDBBINARY_4_128_test_0.dat
+/local-scratch/kia/remote_c/model.py:299: UserWarning: nn.init.xavier_uniform is now deprecated in favor of nn.init.xavier_uniform_.
+  nn.init.xavier_uniform(param,gain=nn.init.calculate_gain('sigmoid'))
+/local-scratch/kia/remote_c/model.py:297: UserWarning: nn.init.constant is now deprecated in favor of nn.init.constant_.
+  nn.init.constant(param, 0.25)
+/local-scratch/kia/remote_c/model.py:302: UserWarning: nn.init.xavier_uniform is now deprecated in favor of nn.init.xavier_uniform_.
+  m.weight.data = init.xavier_uniform(m.weight.data, gain=nn.init.calculate_gain('relu'))
+/local-scratch/kia/remote_c/train.py:591: UserWarning: invalid index of a 0-dim tensor. This will be an error in PyTorch 0.5. Use tensor.item() to convert a 0-dim tensor to a Python number
+  log_value('loss_'+args.fname, loss.data[0], epoch*args.batch_ratio+batch_idx)
+/local-scratch/kia/remote_c/train.py:593: UserWarning: invalid index of a 0-dim tensor. This will be an error in PyTorch 0.5. Use tensor.item() to convert a 0-dim tensor to a Python number
+  loss_sum += loss.data[0]*feature_dim
+/local-scratch/kia/remote_c/train.py:588: UserWarning: invalid index of a 0-dim tensor. This will be an error in PyTorch 0.5. Use tensor.item() to convert a 0-dim tensor to a Python number
+  epoch, args.epochs,loss.data[0], args.graph_type, args.num_layers, args.hidden_size_rnn))
+Epoch: 100/3000, train loss: 0.198460, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -35.25671362876892
+test done, graphs saved
+Epoch: 200/3000, train loss: 0.194735, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -34.96121025085449
+test done, graphs saved
+Epoch: 300/3000, train loss: 0.219153, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -35.04807996749878
+test done, graphs saved
+Epoch: 400/3000, train loss: 0.134651, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -35.105278730392456
+test done, graphs saved
+Epoch: 500/3000, train loss: 0.192433, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -35.32600474357605
+test done, graphs saved
+Epoch: 600/3000, train loss: 0.189053, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -34.86714458465576
+test done, graphs saved
+Epoch: 700/3000, train loss: 0.144518, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -34.935086488723755
+test done, graphs saved
+Epoch: 800/3000, train loss: 0.173171, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -34.66060709953308
+test done, graphs saved
+Epoch: 900/3000, train loss: 0.174249, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -35.19843530654907
+test done, graphs saved
+Epoch: 1000/3000, train loss: 0.171935, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -35.10873246192932
+test done, graphs saved
+Epoch: 1100/3000, train loss: 0.160943, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -34.90600037574768
+test done, graphs saved
+Epoch: 1200/3000, train loss: 0.179900, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -35.161423444747925
+test done, graphs saved
+Epoch: 1300/3000, train loss: 0.151196, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -34.85374474525452
+test done, graphs saved
+Epoch: 1400/3000, train loss: 0.129774, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -35.358078479766846
+test done, graphs saved
+Epoch: 1500/3000, train loss: 0.194727, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -35.874584436416626
+test done, graphs saved
+Epoch: 1600/3000, train loss: 0.125761, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -35.50489950180054
+test done, graphs saved
+Epoch: 1700/3000, train loss: 0.157803, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -36.078662395477295
+test done, graphs saved
+Epoch: 1800/3000, train loss: 0.162501, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -34.79399347305298
+test done, graphs saved
+Epoch: 1900/3000, train loss: 0.188385, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -35.109458923339844
+test done, graphs saved
+Epoch: 2000/3000, train loss: 0.156310, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -35.76922416687012
+test done, graphs saved
+Epoch: 2100/3000, train loss: 0.149781, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -35.24780344963074
+test done, graphs saved
+Epoch: 2200/3000, train loss: 0.165885, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -34.7508909702301
+test done, graphs saved
+Epoch: 2300/3000, train loss: 0.114993, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -35.266571044921875
+test done, graphs saved
+Epoch: 2400/3000, train loss: 0.135593, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -34.61822962760925
+test done, graphs saved
+Epoch: 2500/3000, train loss: 0.156308, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -35.82247567176819
+test done, graphs saved
+Epoch: 2600/3000, train loss: 0.185014, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -34.92150521278381
+test done, graphs saved
+Epoch: 2700/3000, train loss: 0.139045, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -35.23864006996155
+test done, graphs saved
+Epoch: 2800/3000, train loss: 0.113816, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -35.06669282913208
+test done, graphs saved
+Epoch: 2900/3000, train loss: 0.162598, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -35.9027099609375
+test done, graphs saved
+Epoch: 3000/3000, train loss: 0.133722, graph type: IMDBBINARY, num_layer: 4, hidden: 128
+generation time: -35.1387722492218
+test done, graphs saved
+Train Time:  7667.092327704886
