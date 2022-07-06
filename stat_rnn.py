@@ -623,6 +623,16 @@ if __name__ == '__main__':
     models = []
     test_fname = "ReportedResult/PTC_result/BIGG/PTC_lattice_graph/test.npy"
     pred_fname = "ReportedResult/PTC_result/GraphRNN/crossEntropy_bestLR001_GraphRNN_RNN_PTC_4_128_pred_300_1.dat_nx22_"
+
+    models = []
+    test_fname = "ReportedResult/IMDb/bigg/test.npy"
+    pred_fname = "ReportedResult/IMDb/bigg/generated.npy"
+    models = []
+    test_fname = "ReportedResult/IMDb/bigg/test.npy"
+    pred_fname = "ReportedResult/IMDb/GraphRNN/crossEntropy_bestLR001_GraphRNN_RNN_IMDBBINARY_4_128_pred_3000_1.dat_nx22_"
+#
+#        ReportedResult/IMDb/bigg/generated.npy__test__1.png
+
 #    pred_fname = "ReportedResult/PTC_result/GraphRNN/crossEntropy_bestLR001_GraphRNN_RNN_PTC_4_128_pred_300_1.dat_nx22_"
 #>>>>>>> 54c3368b9101d4dd6056ed389dd3bbdede972d35
 
