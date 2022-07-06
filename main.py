@@ -111,10 +111,10 @@ if args.model == "KernelAugmentedWithTotalNumberOfTriangles":
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 40, 1500]
     elif dataset == "IMDBBINARY":
 
-        alpha = [1, 1, 1, 1, 1, 1, 1, 1, 40, 1500]
+        alpha = [1, 1, 1, 1, 1, 1, 1, 1, 20, 10]
     elif dataset == "PTC":
 
-        alpha = [1, 1, 1, 1, 1, 1, 1, 1, 40, 100]
+        alpha = [1, 1, 1, 1, 1, 1, 1, 1, 2, 60]
 
     elif dataset == "FIRSTMM_DB":
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 50, 100]
