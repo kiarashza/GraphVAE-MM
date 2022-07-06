@@ -31,7 +31,7 @@ parser.add_argument('-e', dest="epoch_number", default=20000, help="Number of Ep
 parser.add_argument('-v', dest="Vis_step", default=1000, help="at every Vis_step 'minibatch' the plots will be updated")
 parser.add_argument('-redraw', dest="redraw", default=False, help="either update the log plot each step")
 parser.add_argument('-lr', dest="lr", default=0.0003, help="model learning rate")
-parser.add_argument('-dataset', dest="dataset", default="PTC",
+parser.add_argument('-dataset', dest="dataset", default="IMDBBINARY",
                     help="possible choices are:   wheel_graph,PTC, FIRSTMM_DB, star, triangular_grid, multi_community, NCI1, ogbg-molbbbp, IMDbMulti, grid, community, citeseer, lobster, DD")  # citeceer: ego; DD:protein
 parser.add_argument('-graphEmDim', dest="graphEmDim", default=1024, help="the dimention of graph Embeding LAyer; z")
 parser.add_argument('-graph_save_path', dest="graph_save_path", default=None,
@@ -108,6 +108,9 @@ if args.model == "KernelAugmentedWithTotalNumberOfTriangles":
         alpha = [0, 0, 0, 0, 0, 1, 1, 0, 40, 1500]
         alpha = [0, 0, 0, 0, 0, 0, 0, 1, 40, 1500]
         # -----------------------------------------
+        alpha = [1, 1, 1, 1, 1, 1, 1, 1, 40, 1500]
+    elif dataset == "IMDBBINARY":
+
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 40, 1500]
     elif dataset == "PTC":
 
