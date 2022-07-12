@@ -28,7 +28,7 @@ keepThebest = False
 parser = argparse.ArgumentParser(description='Kernel VGAE')
 
 parser.add_argument('-e', dest="epoch_number", default=20000, help="Number of Epochs to train the model", type=int)
-parser.add_argument('-v', dest="Vis_step", default=1000, help="at every Vis_step 'minibatch' the plots will be updated")
+parser.add_argument('-v', dest="Vis_step", default=4000, help="at every Vis_step 'minibatch' the plots will be updated")
 parser.add_argument('-redraw', dest="redraw", default=False, help="either update the log plot each step")
 parser.add_argument('-lr', dest="lr", default=0.0003, help="model learning rate")
 parser.add_argument('-dataset', dest="dataset", default="IMDBBINARY",
@@ -111,7 +111,7 @@ if args.model == "KernelAugmentedWithTotalNumberOfTriangles":
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 40, 1500]
     elif dataset == "IMDBBINARY":
 
-        alpha = [1, 1, 1, 1, 1, 1, 1, 1, 20, 10]
+        alpha = [1, 1, 1, 1, 1, 1, 1, 1, 20, 50]
     elif dataset == "PTC":
 
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 2, 60]
@@ -184,7 +184,7 @@ functions.append("KL-D")
 pltr = plotter.Plotter(save_to_filepath="kernelVGAE_Log", functions=functions)
 
 synthesis_graphs = {"wheel_graph", "star", "triangular_grid", "DD", "ogbg-molbbbp", "grid", "small_lobster",
-                    "small_grid", "community", "lobster", "ego", "one_grid"}
+                    "small_grid", "community", "lobster", "ego", "one_grid", "IMDBBINARY"}
 
 
 class NodeUpsampling(torch.nn.Module):
@@ -562,9 +562,27 @@ for epoch in range(epoch_number):
                 sample_graph = sample_graph[:node_num[rnd_indx], :node_num[rnd_indx]]
                 sample_graph[sample_graph >= 0.5] = 1
                 sample_graph[sample_graph < 0.5] = 0
+
+
                 G = nx.from_numpy_matrix(sample_graph)
                 plotter.plotG(G, "generated" + dataset,
                               file_name=graph_save_path + "generatedSample_At_epoch" + str(epoch))
+                print("reconstructed graph vs Validation:")
+                logging.info("reconstructed graph vs Validation:")
+                reconstructed_adj = reconstructed_adj.cpu().detach().numpy()
+                reconstructed_adj[reconstructed_adj >= 0.5] = 1
+                reconstructed_adj[reconstructed_adj < 0.5] = 0
+                reconstructed_adj = [nx.from_numpy_matrix(reconstructed_adj[i]) for i in range(reconstructed_adj.shape[0])]
+                reconstructed_adj = [nx.Graph(G.subgraph(max(nx.connected_components(G), key=len))) for G in
+                                    reconstructed_adj if not nx.is_empty(G)]
+
+                target_set = [nx.from_numpy_matrix(val_adj[i].toarray()) for i in range(len(val_adj))]
+                target_set = [nx.Graph(G.subgraph(max(nx.connected_components(G), key=len))) for G in target_set if
+                            not nx.is_empty(G)]
+                logging.info(mmd_eval(reconstructed_adj, target_set, diam=True))
+
+
+
             model.eval()
             if task == "graphGeneration":
                 EvalTwoSet(model, val_adj, graph_save_path, Save_generated=True, _f_name=epoch)
