@@ -28,7 +28,7 @@ keepThebest = False
 parser = argparse.ArgumentParser(description='Kernel VGAE')
 
 parser.add_argument('-e', dest="epoch_number", default=20000, help="Number of Epochs to train the model", type=int)
-parser.add_argument('-v', dest="Vis_step", default=1000, help="at every Vis_step 'minibatch' the plots will be updated")
+parser.add_argument('-v', dest="Vis_step", default=4000, help="at every Vis_step 'minibatch' the plots will be updated")
 parser.add_argument('-redraw', dest="redraw", default=False, help="either update the log plot each step")
 parser.add_argument('-lr', dest="lr", default=0.0003, help="model learning rate")
 parser.add_argument('-dataset', dest="dataset", default="IMDBBINARY",
@@ -47,7 +47,7 @@ parser.add_argument('-batchSize', dest="batchSize", default=200,
 parser.add_argument('-UseGPU', dest="UseGPU", default=True, help="either use GPU or not if availabel")
 parser.add_argument('-model', dest="model", default="KernelAugmentedWithTotalNumberOfTriangles",
                     help="KernelAugmentedWithTotalNumberOfTriangles is the only option in this rep")
-parser.add_argument('-device', dest="device", default="cuda:0", help="Which device should be used")
+parser.add_argument('-device', dest="device", default="cuda:1", help="Which device should be used")
 parser.add_argument('-task', dest="task", default="graphGeneration", help="only option in this rep is graphGeneration")
 parser.add_argument('-BFS', dest="bfsOrdering", default=True, help="use bfs for graph permutations", type=bool)
 parser.add_argument('-directed', dest="directed", default=True, help="is the dataset directed?!", type=bool)
@@ -111,7 +111,8 @@ if args.model == "KernelAugmentedWithTotalNumberOfTriangles":
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 40, 1500]
     elif dataset == "IMDBBINARY":
 
-        alpha = [1, 1, 1, 1, 1, 1, 1, 1, 20, 10]
+        alpha = [1, 1, 1, 1, 1, 1, 1, 1, 5, 30]
+        alpha = [1, 1, 1, 1, 1, 1, 1, 1, 10, 20]
     elif dataset == "PTC":
 
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 2, 60]
