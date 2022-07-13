@@ -1,0 +1,8 @@
+Using backend: pytorch
+KernelVGAE SETING: Namespace(PATH='model', UseGPU=True, Vis_step=4000, batchSize=200, beta=None, bfsOrdering=True, dataset='IMDBBINARY', decoder='FC', device='cuda:1', directed=True, encoder_type='AvePool', epoch_number=20000, graphEmDim=1024, graph_save_path=None, lr=0.0003, model='KernelAugmentedWithTotalNumberOfTriangles', plot_testGraphs=True, redraw=False, task='graphGeneration', use_feature=True)
+kernl_type:['trans_matrix', 'in_degree_dist', 'out_degree_dist', 'TotalNumberOfTriangles']
+alpha: [1, 1, 1, 1, 1, 1, 1, 1, 10, 20] num_step:5
+the selected device is : cuda:1
+/localhome/kzahirni/anaconda3/envs/graphVAE-GPU2/lib/python3.7/site-packages/numpy/core/_asarray.py:136: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  return array(a, dtype, copy=False, order=order, subok=True)
+printing the test set...
