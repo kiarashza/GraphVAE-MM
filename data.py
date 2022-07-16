@@ -459,6 +459,36 @@ def list_graph_loader( graph_type, _max_list_size=None, return_labels=False):
       graphs_to_writeOnDisk = [gr.toarray() for gr in list_adj]
       np.save('IMDBBINARY_lattice_graph.npy', graphs_to_writeOnDisk, allow_pickle=True)
 
+  elif graph_type=="NCI1":
+      data = dgl.data.GINDataset(name='NCI1', self_loop=False)
+      graphs, labels = data.graphs, data.labels
+      for i, graph in enumerate(graphs):
+          list_adj.append(csr_matrix(graph.adjacency_matrix().to_dense().numpy()))
+          # list_x.append(graph.ndata['feat'])
+          list_x.append(None)
+          list_labels.append(labels[i].cpu().item())
+      graphs_to_writeOnDisk = [gr.toarray() for gr in list_adj]
+      np.save('NCI1_lattice_graph.npy', graphs_to_writeOnDisk, allow_pickle=True)
+  elif graph_type=="MUTAG":
+      data = dgl.data.GINDataset(name='MUTAG', self_loop=False)
+      graphs, labels = data.graphs, data.labels
+      for i, graph in enumerate(graphs):
+          list_adj.append(csr_matrix(graph.adjacency_matrix().to_dense().numpy()))
+          # list_x.append(graph.ndata['feat'])
+          list_x.append(None)
+          list_labels.append(labels[i].cpu().item())
+      graphs_to_writeOnDisk = [gr.toarray() for gr in list_adj]
+      np.save('MUTAG_lattice_graph.npy', graphs_to_writeOnDisk, allow_pickle=True)
+  elif graph_type=="COLLAB":
+      data = dgl.data.GINDataset(name='COLLAB', self_loop=False)
+      graphs, labels = data.graphs, data.labels
+      for i, graph in enumerate(graphs):
+          list_adj.append(csr_matrix(graph.adjacency_matrix().to_dense().numpy()))
+          # list_x.append(graph.ndata['feat'])
+          list_x.append(None)
+          list_labels.append(labels[i].cpu().item())
+      graphs_to_writeOnDisk = [gr.toarray() for gr in list_adj]
+      # np.save('COLLAB_lattice_graph.npy', graphs_to_writeOnDisk, allow_pickle=True)
   elif graph_type=="PTC":
       data = dgl.data.GINDataset(name='PTC', self_loop=False)
       graphs, labels = data.graphs, data.labels
@@ -469,15 +499,6 @@ def list_graph_loader( graph_type, _max_list_size=None, return_labels=False):
           list_labels.append(labels[i].cpu().item())
       graphs_to_writeOnDisk = [gr.toarray() for gr in list_adj]
       np.save('PTC_lattice_graph.npy', graphs_to_writeOnDisk, allow_pickle=True)
-
-  elif graph_type=="NCI1":
-      data = dgl.data.GINDataset(name='NCI1', self_loop=False)
-      graphs, labels = data.graphs, data.labels
-      for i, graph in enumerate(graphs):
-          list_adj.append(csr_matrix(graph.adjacency_matrix().to_dense().numpy()))
-          # list_x.append(graph.ndata['feat'])
-          list_x.append(None)
-          list_labels.append(labels[i].cpu().item())
 
   elif graph_type=="ogbg-molbbbp":
       # https://ogb.stanford.edu/docs/graphprop/
@@ -824,7 +845,7 @@ def BFS_Permute( adj_s, x_s, target_kelrnel_val):
 
 
 if __name__ == '__main__':
-    result=list_graph_loader("IMDBBINARY")
+    result=list_graph_loader("NCI1")
     import plotter
 
     for i, G in enumerate(result[0]):

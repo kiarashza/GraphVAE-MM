@@ -31,7 +31,7 @@ parser.add_argument('-e', dest="epoch_number", default=20000, help="Number of Ep
 parser.add_argument('-v', dest="Vis_step", default=4000, help="at every Vis_step 'minibatch' the plots will be updated")
 parser.add_argument('-redraw', dest="redraw", default=False, help="either update the log plot each step")
 parser.add_argument('-lr', dest="lr", default=0.0003, help="model learning rate")
-parser.add_argument('-dataset', dest="dataset", default="IMDBBINARY",
+parser.add_argument('-dataset', dest="dataset", default="MUTAG",
                     help="possible choices are:   wheel_graph,PTC, FIRSTMM_DB, star, triangular_grid, multi_community, NCI1, ogbg-molbbbp, IMDbMulti, grid, community, citeseer, lobster, DD")  # citeceer: ego; DD:protein
 parser.add_argument('-graphEmDim', dest="graphEmDim", default=1024, help="the dimention of graph Embeding LAyer; z")
 parser.add_argument('-graph_save_path', dest="graph_save_path", default=None,
@@ -45,7 +45,7 @@ parser.add_argument('-encoder', dest="encoder_type", default="AvePool",
 parser.add_argument('-batchSize', dest="batchSize", default=200,
                     help="the size of each batch; the number of graphs is the mini batch")
 parser.add_argument('-UseGPU', dest="UseGPU", default=True, help="either use GPU or not if availabel")
-parser.add_argument('-model', dest="model", default="KernelAugmentedWithTotalNumberOfTriangles",
+parser.add_argument('-model', dest="model", default="kipf",
                     help="KernelAugmentedWithTotalNumberOfTriangles is the only option in this rep")
 parser.add_argument('-device', dest="device", default="cuda:0", help="Which device should be used")
 parser.add_argument('-task', dest="task", default="graphGeneration", help="only option in this rep is graphGeneration")
@@ -111,12 +111,20 @@ if args.model == "KernelAugmentedWithTotalNumberOfTriangles":
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 40, 1500]
     elif dataset == "IMDBBINARY":
 
+
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 2, 50]
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 2, 600]
+
+        alpha = [1, 1, 1, 1, 1, 1, 1, 1, 5, 30]
+        alpha = [1, 1, 1, 1, 1, 1, 1, 1, 10, 20]
+
+        alpha = [1, 1, 1, 1, 1, 1, 1, 1, 20, 50]
+
     elif dataset == "PTC":
 
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 2, 60]
-
+    elif dataset =="MUTAG":
+        alpha = [1, 1, 1, 1, 1, 1, 1, 1, 2, 60]
     elif dataset == "FIRSTMM_DB":
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 50, 100]
     elif dataset == "DD":
@@ -185,7 +193,7 @@ functions.append("KL-D")
 pltr = plotter.Plotter(save_to_filepath="kernelVGAE_Log", functions=functions)
 
 synthesis_graphs = {"wheel_graph", "star", "triangular_grid", "DD", "ogbg-molbbbp", "grid", "small_lobster",
-                    "small_grid", "community", "lobster", "ego", "one_grid", "IMDBBINARY"}
+                    "small_grid", "community", "lobster", "ego", "one_grid", "IMDBBINARY", ""}
 
 
 class NodeUpsampling(torch.nn.Module):
@@ -554,7 +562,7 @@ for epoch in range(epoch_number):
         if (step + 1) % visulizer_step == 0:
             model.eval()
             pltr.redraw()
-            if dataset in synthesis_graphs:
+            if True:
                 dir_generated_in_train = "generated_graph_train/"
                 if not os.path.isdir(dir_generated_in_train):
                     os.makedirs(dir_generated_in_train)

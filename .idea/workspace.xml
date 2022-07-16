@@ -2,10 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="15ce5d39-59f8-441c-a94c-9aa68fce29c2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/MUTAG_lattice_graph.npy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NCI1_lattice_graph.npy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ReportedResult/MMD_AvePool_FC_IMDBBINARY_graphGeneration_KernelAugmentedWithTotalNumberOfTrianglesBFSTrue200001657660953.7991312/_AvePool_FC_IMDBBINARY_graphGeneration_KernelAugmentedWithTotalNumberOfTriangles_elbo_loss.txt_CrossEntropyLoss.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eval/orca/tmp.txt" beforeDir="false" afterPath="$PROJECT_DIR$/eval/orca/tmp.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kernelVGAE_Log.png" beforeDir="false" afterPath="$PROJECT_DIR$/kernelVGAE_Log.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.2.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_graph_graph.png" beforeDir="false" afterPath="$PROJECT_DIR$/test_graph_graph.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +43,28 @@
     <property name="settings.editor.selected.configurable" value="PyScientificConfigurable" />
   </component>
   <component name="RunManager" selected="Python.main">
+    <configuration name="GlobalProperties" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="GraphVAE-MM" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/GlobalProperties.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="data" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="GraphVAE-MM" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -129,6 +157,7 @@
       <list>
         <item itemvalue="Python.main" />
         <item itemvalue="Python.data" />
+        <item itemvalue="Python.GlobalProperties" />
         <item itemvalue="Python.stat_rnn" />
         <item itemvalue="Python.test" />
       </list>
@@ -148,7 +177,8 @@
       <workItem from="1656697163468" duration="10886000" />
       <workItem from="1657284733805" duration="16285000" />
       <workItem from="1657563247809" duration="25835000" />
-      <workItem from="1657713412955" duration="604000" />
+      <workItem from="1657713412955" duration="20400000" />
+      <workItem from="1657984024079" duration="5424000" />
     </task>
     <servers />
   </component>
@@ -172,7 +202,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>634</line>
+          <line>642</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -182,17 +212,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/data.py</url>
-          <line>838</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/data.py</url>
-          <line>540</line>
+          <line>561</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/data.py</url>
-          <line>556</line>
+          <line>577</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -205,13 +230,19 @@
           <line>683</line>
           <option name="timeStamp" value="34" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>617</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/GraphVAE_MM$test.coverage" NAME="test Coverage Results" MODIFIED="1655158572993" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/GraphVAE_MM$stat_rnn.coverage" NAME="stat_rnn Coverage Results" MODIFIED="1656383394557" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/GraphVAE_MM$main.coverage" NAME="main Coverage Results" MODIFIED="1657653294440" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/GraphVAE_MM$data.coverage" NAME="data Coverage Results" MODIFIED="1656951516287" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/GraphVAE_MM$main.coverage" NAME="main Coverage Results" MODIFIED="1657989789390" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/GraphVAE_MM$GlobalProperties.coverage" NAME="GlobalProperties Coverage Results" MODIFIED="1657740654785" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/GraphVAE_MM$data.coverage" NAME="data Coverage Results" MODIFIED="1657989752775" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
