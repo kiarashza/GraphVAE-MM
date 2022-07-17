@@ -1,0 +1,114 @@
+/localhome/kzahirni/anaconda3/envs/rnn_vae_graph22/lib/python3.5/site-packages/sklearn/utils/fixes.py:313: FutureWarning: numpy not_equal will not check object identity in the future. The comparison did not return the same result as suggested by the identity (`is`)) and will change.
+  _nan_object_mask = _nan_object_array != _nan_object_array
+CUDA 1
+File name prefix GraphRNN_RNN_MUTAG_4_128_
+graph_validate_len 18.7027027027027
+graph_test_len 18.18421052631579
+total graph num: 188, training set: 150
+max number node: 28
+max/min number edge: 33; 10
+max previous node: 10
+train and test graphs saved at:  ./graphs/crossEntropy_bestLR001_GraphRNN_RNN_MUTAG_4_128_test_0.dat
+/local-scratch/kia/remote_c/model.py:299: UserWarning: nn.init.xavier_uniform is now deprecated in favor of nn.init.xavier_uniform_.
+  nn.init.xavier_uniform(param,gain=nn.init.calculate_gain('sigmoid'))
+/local-scratch/kia/remote_c/model.py:297: UserWarning: nn.init.constant is now deprecated in favor of nn.init.constant_.
+  nn.init.constant(param, 0.25)
+/local-scratch/kia/remote_c/model.py:302: UserWarning: nn.init.xavier_uniform is now deprecated in favor of nn.init.xavier_uniform_.
+  m.weight.data = init.xavier_uniform(m.weight.data, gain=nn.init.calculate_gain('relu'))
+/local-scratch/kia/remote_c/train.py:591: UserWarning: invalid index of a 0-dim tensor. This will be an error in PyTorch 0.5. Use tensor.item() to convert a 0-dim tensor to a Python number
+  log_value('loss_'+args.fname, loss.data[0], epoch*args.batch_ratio+batch_idx)
+/local-scratch/kia/remote_c/train.py:593: UserWarning: invalid index of a 0-dim tensor. This will be an error in PyTorch 0.5. Use tensor.item() to convert a 0-dim tensor to a Python number
+  loss_sum += loss.data[0]*feature_dim
+/local-scratch/kia/remote_c/train.py:588: UserWarning: invalid index of a 0-dim tensor. This will be an error in PyTorch 0.5. Use tensor.item() to convert a 0-dim tensor to a Python number
+  epoch, args.epochs,loss.data[0], args.graph_type, args.num_layers, args.hidden_size_rnn))
+Epoch: 100/3000, train loss: 0.107845, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -7.439072608947754
+test done, graphs saved
+Epoch: 200/3000, train loss: 0.101196, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -6.00902795791626
+test done, graphs saved
+Epoch: 300/3000, train loss: 0.087649, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -6.016170263290405
+test done, graphs saved
+Epoch: 400/3000, train loss: 0.081329, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -6.009768486022949
+test done, graphs saved
+Epoch: 500/3000, train loss: 0.090271, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -5.980111360549927
+test done, graphs saved
+Epoch: 600/3000, train loss: 0.083068, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -6.028548717498779
+test done, graphs saved
+Epoch: 700/3000, train loss: 0.077913, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -5.953184604644775
+test done, graphs saved
+Epoch: 800/3000, train loss: 0.072591, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -5.97269606590271
+test done, graphs saved
+Epoch: 900/3000, train loss: 0.072484, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -5.980769157409668
+test done, graphs saved
+Epoch: 1000/3000, train loss: 0.066497, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -6.009533405303955
+test done, graphs saved
+Epoch: 1100/3000, train loss: 0.069942, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -5.915487289428711
+test done, graphs saved
+Epoch: 1200/3000, train loss: 0.067432, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -6.0410237312316895
+test done, graphs saved
+Epoch: 1300/3000, train loss: 0.076516, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -5.995146751403809
+test done, graphs saved
+Epoch: 1400/3000, train loss: 0.070780, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -6.029694557189941
+test done, graphs saved
+Epoch: 1500/3000, train loss: 0.064001, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -6.073819160461426
+test done, graphs saved
+Epoch: 1600/3000, train loss: 0.065396, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -5.9895124435424805
+test done, graphs saved
+Epoch: 1700/3000, train loss: 0.069326, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -6.002207517623901
+test done, graphs saved
+Epoch: 1800/3000, train loss: 0.066263, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -5.979180097579956
+test done, graphs saved
+Epoch: 1900/3000, train loss: 0.068757, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -6.117511749267578
+test done, graphs saved
+Epoch: 2000/3000, train loss: 0.067937, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -6.005567789077759
+test done, graphs saved
+Epoch: 2100/3000, train loss: 0.064293, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -6.018642425537109
+test done, graphs saved
+Epoch: 2200/3000, train loss: 0.060127, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -6.02365517616272
+test done, graphs saved
+Epoch: 2300/3000, train loss: 0.064523, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -5.979965925216675
+test done, graphs saved
+Epoch: 2400/3000, train loss: 0.066295, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -5.997331619262695
+test done, graphs saved
+Epoch: 2500/3000, train loss: 0.060193, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -5.99104905128479
+test done, graphs saved
+Epoch: 2600/3000, train loss: 0.063337, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -6.025904893875122
+test done, graphs saved
+Epoch: 2700/3000, train loss: 0.064816, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -6.020976305007935
+test done, graphs saved
+Epoch: 2800/3000, train loss: 0.066041, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -5.942424058914185
+test done, graphs saved
+Epoch: 2900/3000, train loss: 0.060885, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -6.039089202880859
+test done, graphs saved
+Epoch: 3000/3000, train loss: 0.060576, graph type: MUTAG, num_layer: 4, hidden: 128
+generation time: -5.970149755477905
+test done, graphs saved
+Train Time:  4150.858836949978
