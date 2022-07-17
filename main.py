@@ -45,9 +45,9 @@ parser.add_argument('-encoder', dest="encoder_type", default="AvePool",
 parser.add_argument('-batchSize', dest="batchSize", default=200,
                     help="the size of each batch; the number of graphs is the mini batch")
 parser.add_argument('-UseGPU', dest="UseGPU", default=True, help="either use GPU or not if availabel")
-parser.add_argument('-model', dest="model", default="kipf",
+parser.add_argument('-model', dest="model", default="KernelAugmentedWithTotalNumberOfTriangles",
                     help="KernelAugmentedWithTotalNumberOfTriangles is the only option in this rep")
-parser.add_argument('-device', dest="device", default="cuda:1", help="Which device should be used")
+parser.add_argument('-device', dest="device", default="cuda:0", help="Which device should be used")
 parser.add_argument('-task', dest="task", default="graphGeneration", help="only option in this rep is graphGeneration")
 parser.add_argument('-BFS', dest="bfsOrdering", default=True, help="use bfs for graph permutations", type=bool)
 parser.add_argument('-directed', dest="directed", default=True, help="is the dataset directed?!", type=bool)

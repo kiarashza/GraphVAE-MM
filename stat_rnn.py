@@ -630,6 +630,8 @@ if __name__ == '__main__':
     models = []
     test_fname = "ReportedResult/IMDb/bigg/test.npy"
     pred_fname = "ReportedResult/IMDb/GraphRNN/crossEntropy_bestLR001_GraphRNN_RNN_IMDBBINARY_4_128_pred_3000_1.dat_nx22_"
+    pred_fname = "ReportedResult/MUTAG_lattice_graph/generated.npy"
+    test_fname = "ReportedResult/MUTAG_lattice_graph/test.npy"
 #
 #        ReportedResult/IMDb/bigg/generated.npy__test__1.png
 
