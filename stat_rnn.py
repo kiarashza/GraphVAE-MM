@@ -633,6 +633,18 @@ if __name__ == '__main__':
     models = []
     pred_fname = "ReportedResult/MUTAG_lattice_graph/generated.npy"
     test_fname = "ReportedResult/MUTAG_lattice_graph/test.npy"
+
+    models = []
+    pred_fname = "ReportedResult/MUTAG/GRAPHRNN/crossEntropy_bestLR001_GraphRNN_MLP_MUTAG_4_128_pred_3000_1.dat_nx22_"
+    test_fname = "ReportedResult/MUTAG/BIG_MUTAG_lattice_graph/test.npy"
+
+    models = []
+    pred_fname = "ReportedResult/MUTAG/GRAPHRNN/crossEntropy_bestLR001_GraphRNN_RNN_MUTAG_4_128_pred_3000_1.dat_nx22_"
+    test_fname = "ReportedResult/MUTAG/BIG_MUTAG_lattice_graph/test.npy"
+
+    models = []
+    pred_fname = "ReportedResult/MUTAG/GRAPHRNN/crossEntropy_bestLR001_GraphRNN_RNN_MUTAG_4_128_pred_3000_1.dat_nx22_"
+    test_fname = "ReportedResult/MUTAG/GRAN/GRAN_MUTAG_lattice_graph__gen_adj.npy"
     
     models.append([test_fname,pred_fname, None])
     #---------------------------------------------
