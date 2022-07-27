@@ -121,7 +121,7 @@ if args.model == "KernelAugmentedWithTotalNumberOfTriangles":
 
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 2, 60]
     elif dataset =="MUTAG":
-        alpha = [1, 1, 1, 1, 1, 1, 1, 1, 2, 60]
+        alpha = [1, 1, 1, 1, 1, 1, 1, 1, 4, 60]
     elif dataset == "FIRSTMM_DB":
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 50, 100]
     elif dataset == "DD":
