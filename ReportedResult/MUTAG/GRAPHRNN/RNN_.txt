@@ -1,0 +1,50 @@
+
+
+WARNING:root:The OGB package is out of date. Your version is 1.3.1, while the latest version is 1.3.3.
+/localhome/kzahirni/anaconda3/envs/graphVAE-GPU2/lib/python3.7/site-packages/numpy/core/_asarray.py:136: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  return array(a, dtype, copy=False, order=order, subok=True)
+38 38
+-------------------------
+[2.10548048 2.89428006 1.44714003 0.         3.63335897 3.63335897
+ 1.02497864 0.34165955 0.         0.         0.         0.
+ 0.         0.         0.        ]
+...
+[2.24512826 3.1486781  1.57433905 0.08658929 4.07506816 4.07506816
+ 1.06710091 0.3557003  0.13290983 0.07438777 0.14877554 0.07438777
+ 0.00920404 0.00920404 0.        ]
+-------------------------
+-------------------------
+[0.92140518]
+...
+[0.95068021]
+-------------------------
+average edge # in test set:
+14.526315789473685
+average edge # in generated set:
+27.289473684210527
+-------------------------
+averrage number of tri in ref/ test:  0.08658928777369558 0.0
+degree 0.0061313537290546005 clustering 0.2108095881524621 sparsity 2.380631380916043e-07 orbits 0.0008977166451005214 Spec: 0.07026667522588625 Tri 2.0826817153096755e-06  diameter: 0.8196132931968001
+=============================================================================
+38 38
+-------------------------
+[2.10548048 2.89428006 1.44714003 0.         3.63335897 3.63335897
+ 1.02497864 0.34165955 0.         0.         0.         0.
+ 0.         0.         0.        ]
+...
+[2.24512826 3.1486781  1.57433905 0.08658929 4.07506816 4.07506816
+ 1.06710091 0.3557003  0.13290983 0.07438777 0.14877554 0.07438777
+ 0.00920404 0.00920404 0.        ]
+-------------------------
+-------------------------
+[0.92140518]
+...
+[0.95068021]
+-------------------------
+average edge # in test set:
+14.526315789473685
+average edge # in generated set:
+27.289473684210527
+-------------------------
+averrage number of tri in ref/ test:  0.08658928777369558 0.0
+degree 0.0061313537290546005 clustering 0.2108095881524621 sparsity 2.380631380916043e-07 orbits 0.0008977166451005214 Spec: 0.07026667522588625 Tri 2.0826817153096755e-06  diameter: 0.8196132931968001

@@ -645,7 +645,7 @@ if __name__ == '__main__':
     models = []
     pred_fname = "ReportedResult/MUTAG/GRAPHRNN/crossEntropy_bestLR001_GraphRNN_RNN_MUTAG_4_128_pred_3000_1.dat_nx22_"
     test_fname = "ReportedResult/MUTAG/GRAN/GRAN_MUTAG_lattice_graph__gen_adj.npy"
-    
+
     models.append([test_fname,pred_fname, None])
     #---------------------------------------------
     # big-lobsr
@@ -677,16 +677,20 @@ if __name__ == '__main__':
 
         Visualize = True
         import plotter
-        if(True):
+
+        if (Visualize):
+            import plotter
+
+            for i, G in enumerate(generated_graphs[:20]):
+                plotter.plotG(G, "generated", file_name=model[1] + "_" + str(i) + ".png", plot_it=True)
+
+        if(Visualize):
 
             for i,G in enumerate(test_list_adj[:20]):
                 # G = nx.from_scipy_sparse_matrix(G)
                 plotter.plotG(G, "test",  file_name=model[1]+"__test__"+str(i)+".png")
 
-        if(Visualize):
-            import plotter
-            for i,G in enumerate(generated_graphs[:20]):
-                plotter.plotG(G, "generated" , file_name=model[1]+"_"+str(i)+".png")
+
 
 
 

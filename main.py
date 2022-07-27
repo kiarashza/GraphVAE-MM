@@ -31,7 +31,7 @@ parser.add_argument('-e', dest="epoch_number", default=20000, help="Number of Ep
 parser.add_argument('-v', dest="Vis_step", default=4000, help="at every Vis_step 'minibatch' the plots will be updated")
 parser.add_argument('-redraw', dest="redraw", default=False, help="either update the log plot each step")
 parser.add_argument('-lr', dest="lr", default=0.0003, help="model learning rate")
-parser.add_argument('-dataset', dest="dataset", default="MUTAG",
+parser.add_argument('-dataset', dest="dataset", default="ogbg-molbbbp",
                     help="possible choices are:   wheel_graph,PTC, FIRSTMM_DB, star, triangular_grid, multi_community, NCI1, ogbg-molbbbp, IMDbMulti, grid, community, citeseer, lobster, DD")  # citeceer: ego; DD:protein
 parser.add_argument('-graphEmDim', dest="graphEmDim", default=1024, help="the dimention of graph Embeding LAyer; z")
 parser.add_argument('-graph_save_path', dest="graph_save_path", default=None,
@@ -159,8 +159,7 @@ print("alpha: " + str(alpha) + " num_step:" + str(step_num))
 logging.info("kernl_type:" + str(kernl_type))
 logging.info("alpha: " + str(alpha) + " num_step:" + str(step_num))
 
-bin_center = torch.tensor([[x / 10000] for x in range(0, 1000, 1)])
-bin_width = torch.tensor([[9000] for x in range(0, 1000, 1)])  # with is propertion to revese of this value;
+  # with is propertion to revese of this value;
 
 device = torch.device(device if torch.cuda.is_available() and use_gpu else "cpu")
 print("the selected device is :", device)
@@ -422,9 +421,11 @@ in_feature_dim = list_graphs.feature_size  # ToDo: consider none Synthasis data
 nodeNum = list_graphs.max_num_nodes
 
 degree_center = torch.tensor([[x] for x in range(0, SubGraphNodeNum, 1)])
-degree_width = torch.tensor([[.1] for x in range(0, SubGraphNodeNum,
-                                                 1)])  # ToDo: both bin's center and widtg also maximum value of it should be determinde auomaticly
+degree_width = torch.tensor([[.1] for x in range(0, SubGraphNodeNum,1)])  # ToDo: both bin's center and widtg also maximum value of it should be determinde auomaticly
 # ToDo: both bin's center and widtg also maximum value of it should be determinde auomaticly
+
+bin_center = torch.tensor([[x] for x in range(0, SubGraphNodeNum, 1)])
+bin_width = torch.tensor([[1] for x in range(0, SubGraphNodeNum, 1)])
 
 kernel_model = kernel(device=device, kernel_type=kernl_type, step_num=step_num,
                       bin_width=bin_width, bin_center=bin_center, degree_bin_center=degree_center,

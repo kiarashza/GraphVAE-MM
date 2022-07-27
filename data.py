@@ -845,7 +845,7 @@ def BFS_Permute( adj_s, x_s, target_kelrnel_val):
 
 
 if __name__ == '__main__':
-    result=list_graph_loader("NCI1")
+    result=list_graph_loader("ogbg-molbbbp")
     import plotter
 
     for i, G in enumerate(result[0]):
