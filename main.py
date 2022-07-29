@@ -31,7 +31,7 @@ parser.add_argument('-e', dest="epoch_number", default=20000, help="Number of Ep
 parser.add_argument('-v', dest="Vis_step", default=4000, help="at every Vis_step 'minibatch' the plots will be updated")
 parser.add_argument('-redraw', dest="redraw", default=False, help="either update the log plot each step")
 parser.add_argument('-lr', dest="lr", default=0.0003, help="model learning rate")
-parser.add_argument('-dataset', dest="dataset", default="ogbg-molbbbp",
+parser.add_argument('-dataset', dest="dataset", default="IMDBBINARY",
                     help="possible choices are:   wheel_graph,PTC, FIRSTMM_DB, star, triangular_grid, multi_community, NCI1, ogbg-molbbbp, IMDbMulti, grid, community, citeseer, lobster, DD")  # citeceer: ego; DD:protein
 parser.add_argument('-graphEmDim', dest="graphEmDim", default=1024, help="the dimention of graph Embeding LAyer; z")
 parser.add_argument('-graph_save_path', dest="graph_save_path", default=None,
@@ -99,7 +99,7 @@ kernl_type = []
 if args.model == "KernelAugmentedWithTotalNumberOfTriangles":
     kernl_type = ["trans_matrix", "in_degree_dist", "out_degree_dist", "TotalNumberOfTriangles"]
 
-    step_num = 5
+    step_num = 3
     if dataset == "large_grid":
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 20, 100]
     elif dataset == "ogbg-molbbbp":
@@ -112,7 +112,7 @@ if args.model == "KernelAugmentedWithTotalNumberOfTriangles":
     elif dataset == "IMDBBINARY":
 
 
-        alpha = [1, 1, 1, 1, 1, 1, 1, 1, 2, 50]
+        alpha = [ 1, 1, 1, 1, 1, 1, 2, 50]
 
 
 
@@ -400,9 +400,9 @@ else:
 
     if plot_testGraphs:
         print("printing the test set...")
-        for i, G in enumerate(test_list_adj):
-            G = nx.from_numpy_matrix(G.toarray())
-            plotter.plotG(G, graph_save_path+"_test_graph" + str(i))
+        # for i, G in enumerate(test_list_adj):
+        #     G = nx.from_numpy_matrix(G.toarray())
+        #     plotter.plotG(G, graph_save_path+"_test_graph" + str(i))
 
 print("#------------------------------------------------------")
 fifty_fifty_dataset = list_adj + test_list_adj
