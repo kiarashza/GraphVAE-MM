@@ -627,6 +627,15 @@ def list_graph_loader( graph_type, _max_list_size=None, return_labels=False):
               list_x.append(None)
               count += 1
           seed_tmp += 1
+  elif graph_type == "QM9":
+      data = dgl.data.QM9Dataset(label_keys=['mu'])
+      for i, graph in enumerate(data):
+          # if i==1000:
+          #     break
+          adj = dgl.to_homo(graph[0]).adjacency_matrix().to_dense().numpy()
+          list_adj.append(scipy.sparse.csr_matrix(adj))
+          list_x.append(None)
+          # list_labels.append(labels[i].cpu().item())
   elif graph_type == 'lobster':
       graphs = []
       p1 = 0.7

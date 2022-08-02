@@ -117,6 +117,10 @@ if args.model == "KernelAugmentedWithTotalNumberOfTriangles":
 
 
 
+
+    elif dataset == "QM9":
+        step_num = 2
+        alpha = [ 1, 1, 1, 1, 1, 20, 200]
     elif dataset == "PTC":
 
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 2, 60]
