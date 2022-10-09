@@ -2,47 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fa050dee-7327-4b87-a295-326047630016" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/GraphVAE-MM.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/GraphVAE-MM.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/other.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bigg_PTC.result.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Concerge_ogb.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Concerge_triangle.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DD_graph.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IMDBBINARY_lattice_graph.npy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IMDBBinary__10_20.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IMDBBinary__2_200.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IMDBBinary__2_600.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IMDBBinary__5_25.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IMDBBinary_kernel_40100.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IMDBBinary_kernel_401000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IMDBBinary_kernel_401500.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IMDB_binary40_1500.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lobster_adj.npy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MUTAG_kernel_1.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MUTAG_kernel_4.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MUTAG_kernelf.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MUTAG_kipf.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MUTAG_lattice_graph.npy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCI1_lattice_graph.npy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PTC10_1500.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PTC10_300.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PTC40_100.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PTC40_500.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PTC_5_60.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PTC_lattice_graph.npy" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval/orca/tmp.txt" beforeDir="false" afterPath="$PROJECT_DIR$/eval/orca/tmp.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphVAE_40_1400_PTC.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphVAE_kipf_PTC.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/kernelVGAE_Log.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log.log" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ogbg-molbbbp.npy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/plotter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_graph_graph.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/triangular_lattice_graph.npy" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,7 +107,7 @@
       <workItem from="1663077257071" duration="12194000" />
       <workItem from="1664277110280" duration="15983000" />
       <workItem from="1664561132814" duration="1291000" />
-      <workItem from="1665320526816" duration="2276000" />
+      <workItem from="1665320526816" duration="3585000" />
     </task>
     <servers />
   </component>
@@ -157,12 +119,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/data.py</url>
-          <line>946</line>
+          <line>932</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/data.py</url>
-          <line>243</line>
+          <line>229</line>
           <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

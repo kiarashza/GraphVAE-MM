@@ -1,18 +1,4 @@
-# import random
-#
-# import networkx as nx
-# import numpy as np
-# import torch
-# from scipy.sparse import *
-# from  Synthatic_graph_generator import *
-# # from util import *
-# import os
-# import pickle as pkl
-# import scipy.sparse as sp
-# import warnings
-#
-# import dgl as dgl
-#
+
 import random
 
 import networkx as nx
