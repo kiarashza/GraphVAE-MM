@@ -18,7 +18,7 @@ The first and second column shows generated graphs by GraphVAE-MM and GraphVAE. 
 ## Model Convergence
 The figures below show the convergence of GraphVAE-MM for each term in the objective function,  the local and global graph properties loss and KL penalty. For brevity, only two datasets are illustrated. These plots are generated automatically after each "Vis_step" iteration, Vis_step is an input argument. Here kernel1 to kernel 5 corresponds to 1 to 5 Step transition probability kernels and loss is the sum of the terms. 
 ![This is triangle graph train loss convergence](https://github.com/GraphVAE-MM/blob/main/Concerge_triangle.png)
-![This is ogb graph train loss convergence](https://github.com/GraphVAE-MM//blob/main/Concerge_ogb.png](https://github.com/kiarashza/GraphVAE-MM/blob/master/ReportedResult/MMD_AvePool_FC_ogbg-molbbbp_graphGeneration_KernelAugmentedWithTotalNumberOfTrianglesBFSTrue100001651544336.7176464/KernelVGAE_log_plot.png))
+![This is ogb graph train loss convergence](https://github.com/kiarashza/GraphVAE-MM/blob/master/ReportedResult/MMD_AvePool_FC_ogbg-molbbbp_graphGeneration_KernelAugmentedWithTotalNumberOfTrianglesBFSTrue100001651544336.7176464/KernelVGAE_log_plot.png)
 
 
 
