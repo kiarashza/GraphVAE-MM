@@ -1,0 +1,102 @@
+ python run_exp.py
+INFO  | 2022-07-17 14:32:24,959 | run_exp.py                | line 26   : Writing log file to exp/GRAN/GRANMixtureBernoulli_MUTAG_lattice_graph_2022-Jul-17-14-32-24_2527534/log_exp_2527534.txt
+INFO  | 2022-07-17 14:32:24,959 | run_exp.py                | line 27   : Exp instance id = 2527534
+INFO  | 2022-07-17 14:32:24,959 | run_exp.py                | line 28   : Exp comment = None
+INFO  | 2022-07-17 14:32:24,959 | run_exp.py                | line 29   : Config =
+{'dataset': {'data_path': 'data/',
+             'dev_ratio': 0.2,
+             'has_node_feat': False,
+             'is_overwrite_precompute': False,
+             'is_sample_subgraph': True,
+             'is_save_split': False,
+             'loader_name': 'GRANData',
+             'name': 'MUTAG_lattice_graph',
+             'node_order': 'DFS',
+             'num_fwd_pass': 1,
+             'num_subgraph_batch': 2,
+             'train_ratio': 0.8},
+ 'device': 'cuda:0',
+ 'exp_dir': 'exp/GRAN',
+ 'exp_name': 'GRANMixtureBernoulli_MUTAG_lattice_graph_2022-Jul-17-14-32-24_2527534',
+ 'gpus': [0],
+ 'model': {'block_size': 1,
+           'dimension_reduce': True,
+           'edge_weight': 1.0,
+           'embedding_dim': 512,
+           'has_attention': True,
+           'hidden_dim': 512,
+           'is_sym': True,
+           'max_num_nodes': 500,
+           'name': 'GRANMixtureBernoulli',
+           'num_GNN_layers': 7,
+           'num_GNN_prop': 1,
+           'num_canonical_order': 1,
+           'num_mix_component': 20,
+           'sample_stride': 1},
+ 'run_id': '2527534',
+ 'runner': 'GranRunner',
+ 'save_dir': 'exp/GRAN/GRANMixtureBernoulli_MUTAG_lattice_graph_2022-Jul-17-14-32-24_2527534',
+ 'seed': 1234,
+ 'test': {'batch_size': 20,
+          'better_vis': True,
+          'dataset_name': 'MUTAG_lattice_graph',
+          'is_single_plot': False,
+          'is_test_ER': False,
+          'is_vis': True,
+          'num_test_gen': 408,
+          'num_vis': 20,
+          'num_workers': 0,
+          'test_model_dir': 'exp/GRAN/GRANMixtureBernoulli_MUTAG_lattice_graph_2022-Jul-17-12-17-46_2369080/',
+          'test_model_name': 'model_snapshot_0003000.pth',
+          'vis_num_row': 5},
+ 'train': {'batch_size': 16,
+           'display_iter': 10,
+           'is_resume': False,
+           'lr': 0.0001,
+           'lr_decay': 0.1,
+           'lr_decay_epoch': [100000000],
+           'max_epoch': 3000,
+           'momentum': 0.9,
+           'num_workers': 16,
+           'optimizer': 'Adam',
+           'resume_dir': None,
+           'resume_epoch': 5000,
+           'resume_model': 'model_snapshot_0005000.pth',
+           'shuffle': True,
+           'snapshot_epoch': 1000,
+           'valid_epoch': 50,
+           'wd': 0.0},
+ 'use_gpu': True,
+ 'use_horovod': False}
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+max # nodes = 28 || mean # nodes = 17.930851063829788
+max # edges = 33 || mean # edges = 19.79255319148936
+INFO  | 2022-07-17 14:32:24,984 | gran_runner.py            | line 165  : Train/val/test = 150/37/38
+INFO  | 2022-07-17 14:32:24,985 | gran_runner.py            | line 178  : No Edges vs. Edges in training set = 16.964026506784474
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 21/21 [08:37<00:00, 24.63s/it]
+INFO  | 2022-07-17 14:41:04,100 | gran_runner.py            | line 356  : Average test time per mini-batch = 24.634186506271362
+-------------------------
+[0.94049753]
+...
+[0.94285681]
+-------------------------
+average edge # in test set:
+22.027027027027028
+average edge # in generated set:
+21.071428571428573
+-------------------------
+/localhome/kzahirni/anaconda3/envs/GRAN/lib/python3.7/site-packages/numpy/lib/npyio.py:528: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.
+  arr = np.asanyarray(arr)
+-------------------------
+[0.92140518]
+...
+[0.94285681]
+-------------------------
+average edge # in test set:
+14.526315789473685
+average edge # in generated set:
+21.071428571428573
+-------------------------
+INFO  | 2022-07-17 14:43:27,896 | gran_runner.py            | line 426  : Validation MMD scores of #nodes/degree/clustering/4orbits/spectral/sparsity are = 0.41116065386675604/0.004249552599625117/0.027238288421891355/0.002131040251768024/0.029916976359103176/1.5461700808572232e-09
+INFO  | 2022-07-17 14:43:27,897 | gran_runner.py            | line 427  : Test MMD scores of #nodes/degree/clustering/4orbits/spectral/sparsity are = 1.9999999495774867/-4.118884517234633e-05/0.027238288421891355/5.4042399237230754e-05/0.02528400813218523/1.2782567404556744e-07
+did the test

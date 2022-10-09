@@ -474,24 +474,33 @@ def plot_both( origianl_graphs,generated_graphs, origi_i, gen_i, plot_name="orig
 
 
 import matplotlib.pyplot as plt
-def featureVisualizer(features, node_color,node_label, filename="", lr = 10,per = 100, n_iter=5000,n_components=2,metric="cosine", legend_label=None):
+def featureVisualizer(features, node_color, filename="", lr = 10,per = 100, n_iter=5000,n_components=2,metric="cosine", legend_label=None):
     # Apply t-SNE transformation on node embeddings
     from sklearn.manifold import TSNE
     tsne = TSNE(learning_rate=lr, metric=metric,perplexity = per, n_components = n_components, verbose = 1, n_iter = n_iter, init ="pca")
     node_embeddings_2d = tsne.fit_transform(features)
 
     f = plt.figure(filename+"_RepresentaionPlot", figsize=(10, 8))
-    scatter = plt.scatter(
-        node_embeddings_2d[:, 0],
-        node_embeddings_2d[:, 1],
-        c=node_color,
-        cmap="jet",
-    alpha = 0.7,
-    )
+
     # plt.legend(handles=scatter.legend_elements()[0], labels=legend_label, fontsize="x-large", loc='upper right')
     if legend_label!=None:
+        scatter = plt.scatter(
+            node_embeddings_2d[:, 0],
+            node_embeddings_2d[:, 1],
+            c=node_color,
+            cmap="jet",
+            alpha=0.7,
+        )
         plt.legend(handles=scatter.legend_elements()[0], labels=legend_label, fontsize=22, loc='upper right')
-
+    else:
+        plt.scatter(
+            node_embeddings_2d[:, 0],
+            node_embeddings_2d[:, 1],
+            c=node_color,
+            cmap="jet",
+            alpha=0.7,
+        )
+        plt.show()
 
     # plt.show()
     # if node_label!=None:

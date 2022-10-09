@@ -27,11 +27,11 @@ keepThebest = False
 
 parser = argparse.ArgumentParser(description='Kernel VGAE')
 
-parser.add_argument('-e', dest="epoch_number", default=20000, help="Number of Epochs to train the model", type=int)
-parser.add_argument('-v', dest="Vis_step", default=4000, help="at every Vis_step 'minibatch' the plots will be updated")
+parser.add_argument('-e', dest="epoch_number", default=10, help="Number of Epochs to train the model", type=int)
+parser.add_argument('-v', dest="Vis_step", default=1000, help="at every Vis_step 'minibatch' the plots will be updated")
 parser.add_argument('-redraw', dest="redraw", default=False, help="either update the log plot each step")
 parser.add_argument('-lr', dest="lr", default=0.0003, help="model learning rate")
-parser.add_argument('-dataset', dest="dataset", default="IMDBBINARY",
+parser.add_argument('-dataset', dest="dataset", default="QM9",
                     help="possible choices are:   wheel_graph,PTC, FIRSTMM_DB, star, triangular_grid, multi_community, NCI1, ogbg-molbbbp, IMDbMulti, grid, community, citeseer, lobster, DD")  # citeceer: ego; DD:protein
 parser.add_argument('-graphEmDim', dest="graphEmDim", default=1024, help="the dimention of graph Embeding LAyer; z")
 parser.add_argument('-graph_save_path', dest="graph_save_path", default=None,
@@ -54,9 +54,10 @@ parser.add_argument('-directed', dest="directed", default=True, help="is the dat
 parser.add_argument('-beta', dest="beta", default=None, help="beta coefiicieny", type=float)
 parser.add_argument('-plot_testGraphs', dest="plot_testGraphs", default=True, help="shall the test set be printed",
                     type=float)
+parser.add_argument('-ideal_Evalaution', dest="ideal_Evalaution" , default=False, help="if you want to comapre the 50%50 subset of dataset comparision?!", type=bool)
 
 args = parser.parse_args()
-
+ideal_Evalaution = args.ideal_Evalaution
 encoder_type = args.encoder_type
 graphEmDim = args.graphEmDim
 visulizer_step = args.Vis_step
@@ -89,18 +90,20 @@ for handler in logging.root.handlers[:]:
 logging.basicConfig(filename=graph_save_path + 'log.log', filemode='w', level=logging.INFO)
 
 # **********************************************************************
-# setting
+# setting; general setting and hyper-parameters for each dataset
 print("KernelVGAE SETING: " + str(args))
 logging.info("KernelVGAE SETING: " + str(args))
 PATH = args.PATH  # the dir to save the with the best performance on validation data
 
 kernl_type = []
 
+#---------------------------------------------------------------------
 if args.model == "KernelAugmentedWithTotalNumberOfTriangles":
     kernl_type = ["trans_matrix", "in_degree_dist", "out_degree_dist", "TotalNumberOfTriangles"]
 
-    step_num = 3
+
     if dataset == "large_grid":
+        step_num = 5 # s in s-step transition
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 20, 100]
     elif dataset == "ogbg-molbbbp":
         # leision study
@@ -109,30 +112,33 @@ if args.model == "KernelAugmentedWithTotalNumberOfTriangles":
         alpha = [0, 0, 0, 0, 0, 0, 0, 1, 40, 1500]
         # -----------------------------------------
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 40, 1500]
+        step_num = 5
     elif dataset == "IMDBBINARY":
-
-
         alpha = [ 1, 1, 1, 1, 1, 1, 2, 50]
-
-
-
-
-
+        step_num = 5
     elif dataset == "QM9":
         step_num = 2
         alpha = [ 1, 1, 1, 1, 1, 20, 200]
     elif dataset == "PTC":
-
-        alpha = [1, 1, 1, 1, 1, 1, 1, 1, 2, 60]
+        step_num = 5
+        alpha = [1, 1, 1, 1, 1, 1, 1, 1, 2, 1]
     elif dataset =="MUTAG":
+        step_num = 5
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 4, 60]
+    elif dataset =="PVGAErandomGraphs":
+        step_num = 5
+        alpha = [1, 1, 1, 1, 1, 1, 1, 1, 4, 1]
     elif dataset == "FIRSTMM_DB":
+        step_num = 5
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 50, 100]
     elif dataset == "DD":
+        step_num = 5
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 50, 1000]
     elif dataset == "grid":
+        step_num = 5
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 50, 2000]
     elif dataset == "lobster":
+        step_num = 5
         # leision study
         alpha = [1, 1, 1, 1, 1, 0, 0, 0, 40, 2000]  # degree
         alpha = [0, 0, 0, 0, 0, 1, 1, 0, 40, 2000]  # degree
@@ -140,11 +146,16 @@ if args.model == "KernelAugmentedWithTotalNumberOfTriangles":
         # -------------------------------------------------
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 40, 2000]
     elif dataset == "wheel_graph":
+        step_num = 5
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 3000000, 20000 * 50000]
     elif dataset == "triangular_grid":
+        step_num = 5
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 50, 2000]
     elif dataset == "tree":
+        step_num = 5
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 50, 2000]
+#---------------------------------------------------------------------
+
 elif args.model == "kipf":
     alpha = [1, 1]
     step_num = 0
@@ -268,15 +279,16 @@ def test_(number_of_samples, model, graph_size, path_to_save_g, remove_self=True
     return generated_graph_list
 
 
-def EvalTwoSet(model, test_list_adj, graph_save_path, Save_generated=True, _f_name=None):
+def EvalTwoSet(model, test_list_adj, graph_save_path, Save_generated=True, _f_name=None, onlyTheBigestConCom = True):
     generated_graphs = test_(1, model, [x.shape[0] for x in test_list_adj], graph_save_path, save_graphs=Save_generated)
     graphs_to_writeOnDisk = [nx.to_numpy_array(G) for G in generated_graphs]
-    if Save_generated:
-        np.save(graph_save_path + 'generatedGraphs_adj_' + str(_f_name) + '.npy', graphs_to_writeOnDisk,
-                allow_pickle=True)
+    if (onlyTheBigestConCom!=False):
+        if Save_generated:
+            np.save(graph_save_path + 'generatedGraphs_adj_' + str(_f_name) + '.npy', graphs_to_writeOnDisk,
+                    allow_pickle=True)
 
 
-    logging.info(mmd_eval(generated_graphs, [nx.from_numpy_matrix(graph.toarray()) for graph in test_list_adj]))
+            logging.info(mmd_eval(generated_graphs, [nx.from_numpy_matrix(graph.toarray()) for graph in test_list_adj]))
     print("====================================================")
     logging.info("====================================================")
 
@@ -342,10 +354,11 @@ def OptimizerVAE(reconstructed_adj, reconstructed_kernel_val, targert_adj, targe
         reconstructed_adj.shape[0] * reconstructed_adj.shape[1] * reconstructed_adj.shape[2])
     kernel_diff = 0
     each_kernel_loss = []
-
+    log_sigma_values = []
     for i in range(len(target_kernel_val)):
         log_sigma = ((reconstructed_kernel_val[i] - target_kernel_val[i]) ** 2).mean().sqrt().log()
         log_sigma = softclip(log_sigma, -6)
+        log_sigma_values.append(log_sigma.detach().cpu().item())
         step_loss = log_guss(target_kernel_val[i], log_sigma, reconstructed_kernel_val[i]).mean()
         each_kernel_loss.append(step_loss.cpu().detach().numpy() * alpha[i])
         kernel_diff += step_loss * alpha[i]
@@ -354,7 +367,7 @@ def OptimizerVAE(reconstructed_adj, reconstructed_kernel_val, targert_adj, targe
     kernel_diff += kl * alpha[-1]
     each_kernel_loss.append((loss * alpha[-2]).item())
     each_kernel_loss.append((kl * alpha[-1]).item())
-    return kl, loss, acc, kernel_diff, each_kernel_loss
+    return kl, loss, acc, kernel_diff, each_kernel_loss,log_sigma_values
 
 
 def getBack(var_grad_fn):
@@ -396,12 +409,13 @@ if len(list_adj) == 1:
     list_graphs = Datasets(list_adj, self_for_none, list_x, None)
 else:
     max_size = None
-    list_label = None
-    list_adj, test_list_adj, list_x_train, _ = data_split(list_adj, list_x)
+    # list_label = None
+    list_adj, test_list_adj, list_x_train, list_x_test, _ ,list_label_test= data_split(list_adj, list_x,list_label)
     val_adj = list_adj[:int(len(test_list_adj))]
     list_graphs = Datasets(list_adj, self_for_none, list_x_train, list_label, Max_num=max_size,
                            set_diag_of_isol_Zer=False)
-
+    list_test_graphs = Datasets(test_list_adj, self_for_none, list_x_test, list_label_test, Max_num=list_graphs.max_num_nodes,
+                           set_diag_of_isol_Zer=False)
     if plot_testGraphs:
         print("printing the test set...")
         # for i, G in enumerate(test_list_adj):
@@ -409,15 +423,16 @@ else:
         #     plotter.plotG(G, graph_save_path+"_test_graph" + str(i))
 
 print("#------------------------------------------------------")
-fifty_fifty_dataset = list_adj + test_list_adj
+if ideal_Evalaution:
+    fifty_fifty_dataset = list_adj + test_list_adj
 
-fifty_fifty_dataset = [nx.from_numpy_matrix(graph.toarray()) for graph in fifty_fifty_dataset]
-random.shuffle(fifty_fifty_dataset)
-print("50%50 Evalaution of dataset")
-logging.info(mmd_eval(fifty_fifty_dataset[:int(len(fifty_fifty_dataset)/2)],fifty_fifty_dataset[int(len(fifty_fifty_dataset)/2):],diam=True))
+    fifty_fifty_dataset = [nx.from_numpy_matrix(graph.toarray()) for graph in fifty_fifty_dataset]
+    random.shuffle(fifty_fifty_dataset)
+    print("50%50 Evalaution of dataset")
+    logging.info(mmd_eval(fifty_fifty_dataset[:int(len(fifty_fifty_dataset)/2)],fifty_fifty_dataset[int(len(fifty_fifty_dataset)/2):],diam=True))
 
-graphs_to_writeOnDisk = [nx.to_numpy_array(G) for  G in fifty_fifty_dataset]
-np.save(graph_save_path+dataset+'_dataset.npy', graphs_to_writeOnDisk, allow_pickle=True)
+    graphs_to_writeOnDisk = [nx.to_numpy_array(G) for  G in fifty_fifty_dataset]
+    np.save(graph_save_path+dataset+'_dataset.npy', graphs_to_writeOnDisk, allow_pickle=True)
 print("#------------------------------------------------------")
 
 SubGraphNodeNum = subgraphSize if subgraphSize != None else list_graphs.max_num_nodes
@@ -536,7 +551,7 @@ for epoch in range(epoch_number):
 
         reconstructed_adj, prior_samples, post_mean, post_log_std, generated_kernel_val, reconstructed_adj_logit = model(
             org_adj_dgl.to(device), x_s.to(device), batchSize, subgraphs_indexes)
-        kl_loss, reconstruction_loss, acc, kernel_cost, each_kernel_loss = OptimizerVAE(reconstructed_adj,
+        kl_loss, reconstruction_loss, acc, kernel_cost, each_kernel_loss,log_sigma_values = OptimizerVAE(reconstructed_adj,
                                                                                         generated_kernel_val,
                                                                                         subgraphs.to(device),
                                                                                         [val.to(device) for val in
@@ -561,7 +576,7 @@ for epoch in range(epoch_number):
         # torch.nn.utils.clip_grad_norm(model.parameters(),  1.0044e-05)
         optimizer.step()
 
-        if (step + 1) % visulizer_step == 0:
+        if (step + 1) % visulizer_step == 0 or epoch_number==epoch+1:
             model.eval()
             pltr.redraw()
             if True:
@@ -596,6 +611,7 @@ for epoch in range(epoch_number):
 
             model.eval()
             if task == "graphGeneration":
+                # print("generated vs Validation:")
                 EvalTwoSet(model, val_adj, graph_save_path, Save_generated=True, _f_name=epoch)
 
                 if ((step + 1) % visulizer_step * 2):
@@ -615,6 +631,13 @@ for epoch in range(epoch_number):
         logging.info(
             "Epoch: {:03d} |Batch: {:03d} | loss: {:05f} | reconstruction_loss: {:05f} | z_kl_loss: {:05f} | accu: {:03f}".format(
                 epoch + 1, batch, loss.item(), reconstruction_loss.item(), kl_loss.item(), acc) + " " + str(k_loss_str))
+        # print(log_sigma_values)
+        log_std = ""
+        for indx, l in enumerate(log_sigma_values):
+            log_std += "log_std " + functions[indx + 2] + ":"
+            log_std += str(l) + ".   "
+        print(log_std)
+        logging.info(log_std)
         batch += 1
         # scheduler.step()
 model.eval()
@@ -631,14 +654,115 @@ file_name = graph_save_path + "_" + encoder_type + "_" + decoder_type + "_" + da
 with open(file_name, "w") as fp:
     json.dump(list(np.array(pltr.values_train[-2]) + np.array(pltr.values_train[-1])), fp)
 
-with open(file_name + "_CrossEntropyLoss.txt", "w") as fp:
-    json.dump(list(np.array(pltr.values_train[-2])), fp)
-
-with open(file_name + "_train_loss.txt", "w") as fp:
-    json.dump(pltr.values_train[1], fp)
+# with open(file_name + "/_CrossEntropyLoss.txt", "w") as fp:
+#     json.dump(list(np.array(pltr.values_train[-2])), fp)
+#
+# with open(file_name + "/_train_loss.txt", "w") as fp:
+#     json.dump(pltr.values_train[1], fp)
 
 # save the log plot on the current directory
 pltr.save_plot(graph_save_path + "KernelVGAE_log_plot")
 
 if task == "graphGeneration":
     EvalTwoSet(model, test_list_adj, graph_save_path, Save_generated=True, _f_name="final_eval")
+
+# # graph Classification
+# if task == "graphClasssification":
+#
+#
+#     org_adj,x_s, node_num, subgraphs_indexes,  labels = list_graphs.adj_s, list_graphs.x_s, list_graphs.num_nodes, list_graphs.subgraph_indexes, list_graphs.labels
+#
+#     if(type(decoder))in [  GraphTransformerDecoder_FC]: #
+#         node_num = len(node_num)*[list_graphs.max_num_nodes]
+#
+#     x_s = torch.cat(x_s)
+#     x_s = x_s.reshape(-1, x_s.shape[-1])
+#
+#     model.eval()
+#     # if subgraphSize == None:
+#     #     _, subgraphs = get_subGraph_features(org_adj, None, None)
+#
+#     batchSize = [len(org_adj), org_adj[0].shape[0]]
+#
+#     [graph.setdiag(1) for graph in org_adj]
+#     org_adj_dgl = [dgl.from_scipy(graph) for graph in org_adj]
+#
+#     org_adj_dgl = dgl.batch(org_adj_dgl).to(device)
+#     mean, std = model.encode(org_adj_dgl.to(device), x_s.to(device), batchSize)
+#
+#     prior_samples = model.reparameterize(mean, std)
+#     # model.encode(org_adj_dgl.to(device), x_s.to(device), batchSize)
+#     # _, prior_samples, _, _, _,_ = model(org_adj_dgl.to(device), x_s.to(device), node_num, batchSize, subgraphs_indexes)
+#
+#
+#
+#     import classification as CL
+#
+#     # NN Classifier
+#     labels_test, labels_pred, accuracy, micro_recall, macro_recall, micro_precision, macro_precision, micro_f1, macro_f1, conf_matrix, report  = CL.NN(prior_samples.cpu().detach(), labels)
+#
+#     print("Accuracy:{}".format(accuracy),
+#           "Macro_AvgPrecision:{}".format(macro_precision), "Micro_AvgPrecision:{}".format(micro_precision),
+#           "Macro_AvgRecall:{}".format(macro_recall), "Micro_AvgRecall:{}".format(micro_recall),
+#           "F1 - Macro,Micro: {} {}".format(macro_f1, micro_f1),
+#           "confusion matrix:{}".format(conf_matrix))
+#
+#     # KNN clasiifier
+#     labels_test, labels_pred, accuracy, micro_recall, macro_recall, micro_precision, macro_precision, micro_f1, macro_f1, conf_matrix, report  = CL.knn(prior_samples.cpu().detach(), labels)
+#     print("Accuracy:{}".format(accuracy),
+#           "Macro_AvgPrecision:{}".format(macro_precision), "Micro_AvgPrecision:{}".format(micro_precision),
+#           "Macro_AvgRecall:{}".format(macro_recall), "Micro_AvgRecall:{}".format(micro_recall),
+#           "F1 - Macro,Micro: {} {}".format(macro_f1, micro_f1),
+#           "confusion matrix:{}".format(conf_matrix))
+# # evaluatin graph statistics in graph generation tasks
+#
+#
+# if task == "GraphRepresentation":
+#
+#     list_test_graphs.processALL(self_for_none=self_for_none)
+#
+#     test_adj_list = list_test_graphs.get_adj_list()
+#     graphFeatures, _ = get_subGraph_features(test_adj_list, None, kernel_model)
+#     list_test_graphs.set_features(graphFeatures)
+#
+#     from_ = 0
+#     ro = [-1]
+#     org_adj = list_test_graphs.adj_s[from_:to_]
+#     x_s = list_test_graphs.x_s[from_:to_]
+#     # test_adj_list.num_nodes[from_:to_]
+#     labels = list_test_graphs.labels
+#
+#     x_s = torch.cat(x_s)
+#     x_s = x_s.reshape(-1, x_s.shape[-1])
+#
+#     model.eval()
+#     # if subgraphSize == None:
+#     #     _, subgraphs = get_subGraph_features(org_adj, None, None)
+#     # else:
+#     #     target_kelrnel_val, subgraphs = get_subGraph_features(org_adj, subgraphs_indexes, kernel_model)
+#
+#     # target_kelrnel_val = kernel_model(org_adj, node_num)
+#
+#     # batchSize = [org_adj.shape[0], org_adj.shape[1]]
+#
+#     batchSize = [len(org_adj), org_adj[0].shape[0]]
+#
+#     # org_adj_dgl = [dgl.from_scipy(sp.csr_matrix(graph.cpu().detach().numpy())) for graph in org_adj]
+#     [graph.setdiag(1) for graph in org_adj]
+#     org_adj_dgl = [dgl.from_scipy(graph) for graph in org_adj]
+#     org_adj_dgl = dgl.batch(org_adj_dgl).to(device)
+#     pos_wight = torch.true_divide(sum([x.shape[-1] ** 2 for x in subgraphs]) - subgraphs.sum(), subgraphs.sum())
+#
+#     reconstructed_adj, prior_samples, post_mean, post_log_std, generated_kernel_val, reconstructed_adj_logit = model(
+#         org_adj_dgl.to(device), x_s.to(device), batchSize, subgraphs_indexes)
+#
+#     i = 0
+#     dic = {}
+#     digit_labels = []
+#     for labl in labels:
+#         if labl not in dic:
+#             dic[labl] = i
+#             i += 1
+#         digit_labels.append(dic[labl])
+#
+#     plotter.featureVisualizer(prior_samples.detach().cpu().numpy(), digit_labels)

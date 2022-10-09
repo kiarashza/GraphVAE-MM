@@ -1,0 +1,158 @@
+grid
+
+Namespace(accum_grad=1, batch_exec=False, batch_size=32, bfs_permute=False, bits_compress=256, blksize=-1, data_dir='/local-scratch/kiarash/google-research/bigg/data/grid-BFS/', dev_ratio=0.2, directed=False, display=False, dist_backend='gloo', embed_dim=256, epoch_load=1000, epoch_save=100, eval_folder=None, g_type='grid', gpu=0, grad_clip=5, greedy_frac=0, learning_rate=0.001, max_num_nodes=-1, model_dump='/local-scratch/kiarash/google-research/bigg/data/grid-BFS/epoch-1000.ckpt', node_order='DFS', num_epochs=1000, num_proc=1, num_test_gen=200, old_model=False, param_layers=1, phase='test', pos_base=10000, pos_enc=True, rnn_layers=2, save_dir='/local-scratch/kiarash/google-research/bigg/data/grid-BFS/', seed=34, self_loop=False, share_param=True, train_method='full', train_ratio=0.8, tree_pos_enc=False)
+use gpu indexed: 0
+====== begin of tree_clib configuration ======
+| bfs_permute = 0
+| max_num_nodes = 1000000
+| bits_compress = 256
+| dim_embed = 256
+| gpu = 0
+| seed = 34
+======   end of tree_clib configuration ======
+loading from /local-scratch/kiarash/google-research/bigg/data/grid-BFS/epoch-1000.ckpt
+/localhome/kzahirni/anaconda3/envs/bigg/lib/python3.8/site-packages/numpy/lib/npyio.py:518: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.
+  arr = np.asanyarray(arr)
+# gt graphs 20
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 200/200 [06:41<00:00,  2.01s/it]
+average gen tiime: -2.0062818479537965
+saving graphs
+evaluating
+
+
+
+-------------------------------------------------------------------------------
+
+
+ogb
+
+Namespace(accum_grad=1, batch_exec=False, batch_size=32, bfs_permute=False, bits_compress=256, blksize=-                                                                                                                                     1, data_dir='/local-scratch/kiarash/google-research/bigg/data/ogbg-molbbbp/', dev_ratio=0.2, directed=Fa                                                                                                                                     lse, display=False, dist_backend='gloo', embed_dim=256, epoch_load=1000, epoch_save=100, eval_folder=Non                                                                                                                                     e, g_type='ogbg-molbbbp', gpu=0, grad_clip=5, greedy_frac=0, learning_rate=0.001, max_num_nodes=-1, mode                                                                                                                                     l_dump='/local-scratch/kiarash/google-research/bigg/data/ogbg-molbbbp/epoch-1000.ckpt', node_order='DFS'                                                                                                                                     , num_epochs=1000, num_proc=1, num_test_gen=200, old_model=False, param_layers=1, phase='test', pos_base                                                                                                                                     =10000, pos_enc=True, rnn_layers=2, save_dir='/local-scratch/kiarash/google-research/bigg/data/ogbg-molb                                                                                                                                     bbp/', seed=34, self_loop=False, share_param=True, train_method='full', train_ratio=0.8, tree_pos_enc=Fa                                                                                                                                     lse)
+use gpu indexed: 0
+====== begin of tree_clib configuration ======
+| bfs_permute = 0
+| max_num_nodes = 1000000
+| bits_compress = 256
+| dim_embed = 256
+| gpu = 0
+| seed = 34
+======   end of tree_clib configuration ======
+loading from /local-scratch/kiarash/google-research/bigg/data/ogbg-molbbbp/epoch-1000.ckpt
+/localhome/kzahirni/anaconda3/envs/bigg/lib/python3.8/site-packages/numpy/lib/npyio.py:518: VisibleDepre                                                                                                                                     cationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tu                                                                                                                                     ples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must spec                                                                                                                                     ify 'dtype=object' when creating the ndarray.
+  arr = np.asanyarray(arr)
+# gt graphs 408
+100%|█████████████████████████████████████████████████████████████████| 200/200 [00:23<00:00,  8.69it/s]
+average gen tiime: -0.11492276787757874
+saving graphs
+evaluating
+
+
+
+-------------------------------------------------------------------------------
+
+DD
+
+  GNU nano 4.8                                                                                                     DD_res.log
+Namespace(accum_grad=1, batch_exec=False, batch_size=32, bfs_permute=False, bits_compress=256, blksize=-1, data_dir='/local-scratch/kiarash/google-research/bigg/data/DD/', dev_ratio=0.2, directed=False, display=False, dist_backend='gloo>
+use gpu indexed: 0
+====== begin of tree_clib configuration ======
+| bfs_permute = 0
+| max_num_nodes = 1000000
+| bits_compress = 256
+| dim_embed = 256
+| gpu = 0
+| seed = 34
+======   end of tree_clib configuration ======
+loading from /local-scratch/kiarash/google-research/bigg/data/DD/epoch-1000.ckpt
+/localhome/kzahirni/anaconda3/envs/bigg/lib/python3.8/site-packages/numpy/lib/npyio.py:518: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with differ>
+  arr = np.asanyarray(arr)
+# gt graphs 184
+^M  0%|          | 0/200 [00:00<?, ?it/s]^M  0%|          | 1/200 [00:02<07:39,  2.31s/it]^M  1%|          | 2/200 [00:04<08:03,  2.44s/it]^M  2%|▏         | 3/200 [00:09<10:55,  3.33s/it]^M  2%|▏         | 4/200 [00:10<08:27,  2.59s/it>
+average gen tiime: -2.937468535900116
+saving graphs
+evaluating
+
+
+------------------------------------------------------------------------------
+triangles
+Namespace(accum_grad=1, batch_exec=False, batch_size=32, bfs_permute=False, bits_compress=256, blksize=-1, data_dir='/local-scratch/kiarash/google-research/bigg/data/DD/', dev_ratio=0.2, directed=False, display=False, dist_backend='gloo>
+use gpu indexed: 0
+====== begin of tree_clib configuration ======
+| bfs_permute = 0
+| max_num_nodes = 1000000
+| bits_compress = 256
+| dim_embed = 256
+| gpu = 0
+| seed = 34
+======   end of tree_clib configuration ======
+loading from /local-scratch/kiarash/google-research/bigg/data/DD/epoch-1000.ckpt
+/localhome/kzahirni/anaconda3/envs/bigg/lib/python3.8/site-packages/numpy/lib/npyio.py:518: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with differ>
+  arr = np.asanyarray(arr)
+# gt graphs 184
+^M  0%|          | 0/200 [00:00<?, ?it/s]^M  0%|          | 1/200 [00:02<07:39,  2.31s/it]^M  1%|          | 2/200 [00:04<08:02,  2.44s/it]^M  2%|▏         | 3/200 [00:09<10:55,  3.33s/it]^M  2%|▏         | 4/200 [00:10<08:27,  2.59s/it>
+average gen tiime: -2.921336662769318
+saving graphs
+evaluating
+
+-----------------------------------------------------------------------------------
+lobster
+Namespace(accum_grad=1, batch_exec=False, batch_size=32, bfs_permute=False, bits_compress=256, blksize=-1, data_dir='/local-scratch/kiarash/google-research/bigg/data/lobster_Kernel/', dev_ratio=0.2, directed=False, display=False, dist_b>
+use gpu indexed: 0
+====== begin of tree_clib configuration ======
+| bfs_permute = 0
+| max_num_nodes = 1000000
+| bits_compress = 256
+| dim_embed = 256
+| gpu = 0
+| seed = 34
+======   end of tree_clib configuration ======
+loading from /local-scratch/kiarash/google-research/bigg/data/lobster_Kernel/epoch-1000.ckpt
+/localhome/kzahirni/anaconda3/envs/bigg/lib/python3.8/site-packages/numpy/lib/npyio.py:518: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with differ>
+  arr = np.asanyarray(arr)
+# gt graphs 20
+^M  0%|          | 0/200 [00:00<?, ?it/s]^M  0%|          | 1/200 [00:00<00:54,  3.62it/s]^M  2%|▏         | 3/200 [00:00<00:24,  8.09it/s]^M  2%|▎         | 5/200 [00:00<00:29,  6.58it/s]^M  3%|▎         | 6/200 [00:01<00:33,  5.80it/s>
+average gen tiime: -0.31229405999183657
+saving graphs
+evaluating
+------------------------
+mutag
+
+use gpu indexed: 0
+====== begin of tree_clib configuration ======
+| bfs_permute = 0
+| max_num_nodes = 1000000
+| bits_compress = 256
+| dim_embed = 256
+| gpu = 0
+| seed = 34
+======   end of tree_clib configuration ======
+loading from /local-scratch/kiarash/google-research/bigg/data/MUTAG_lattice_graph/epoch-1000.ckpt
+# gt graphs 200
+^M  0%|          | 0/200 [00:00<?, ?it/s]^M  1%|          | 2/200 [00:00<00:17, 11.13it/s]^M  2%|▏         | 4/200 [00:00<00:16, 11.55it/s]^M  3%|▎         | 6/200 [00:00<00:16, 11.72it/s]^M  4%|▍         | 8/200 [00:00<00:16, 11.82it/s>
+average gen tiime: -0.08471905946731567
+saving graphs
+evaluating
+
+
+---------------------------
+PTC
+
+Namespace(accum_grad=1, batch_exec=False, batch_size=32, bfs_permute=False, bits_compress=256, blksize=-1, data_dir='/local-scratch/kiarash/google-research/bigg/data/PTC_lattice_graph/', dev_ratio=0.2, directed=False, display=False, dis>
+use gpu indexed: 0
+====== begin of tree_clib configuration ======
+| bfs_permute = 0
+| max_num_nodes = 1000000
+| bits_compress = 256
+| dim_embed = 256
+| gpu = 0
+| seed = 34
+======   end of tree_clib configuration ======
+loading from /local-scratch/kiarash/google-research/bigg/data/PTC_lattice_graph/epoch-1000.ckpt
+/localhome/kzahirni/anaconda3/envs/bigg/lib/python3.8/site-packages/numpy/lib/npyio.py:518: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with differ>
+  arr = np.asanyarray(arr)
+# gt graphs 200
+^M  0%|          | 0/200 [00:00<?, ?it/s]^M  1%|          | 2/200 [00:00<00:10, 18.65it/s]^M  2%|▏         | 4/200 [00:00<00:11, 17.43it/s]^M  3%|▎         | 6/200 [00:00<00:11, 16.22it/s]^M  4%|▍         | 8/200 [00:00<00:11, 16.86it/s>
+average gen tiime: -0.07096644759178161
+saving graphs
+evaluating
+
+

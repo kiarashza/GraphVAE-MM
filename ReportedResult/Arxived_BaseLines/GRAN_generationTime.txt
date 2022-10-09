@@ -1,0 +1,65 @@
+DD:
+
+max # nodes = 500 || mean # nodes = 257.86710239651416
+max # edges = 1575 || mean # edges = 646.4226579520697
+INFO  | 2022-09-30 13:21:23,363 | gran_runner.py            | line 165  : Train/val/test = 734/183/184
+INFO  | 2022-09-30 13:21:24,600 | gran_runner.py            | line 178  : No Edges vs. Edges in training set = 124.02113340808721
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [06:01<00:00, 36.17s/it]
+INFO  | 2022-09-30 13:27:28,524 | gran_runner.py            | line 356  : Average test time per mini-batch = 36.17093815803528
+-------------------------
+[0.99003195]
+...
+[0.9900721]
+-------------------------
+average edge # in test set:
+760.9125683060109
+average edge # in generated set:
+584.22
+--------------------------------------------------------------------------------------------
+Ogbb
+
+INFO  | 2022-09-30 13:29:22,078 | gran_runner.py            | line 178  : No Edges vs. Edges in training set = 26.595187725212135
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 21/21 [07:25<00:00, 21.20s/it]
+INFO  | 2022-09-30 13:36:49,392 | gran_runner.py            | line 356  : Average test time per mini-batch = 21.196140062241327
+-------------------------
+[0.94466417]
+...
+[0.91032372]
+-------------------------
+average edge # in test set:
+25.034398034398034
+average edge # in generated set:
+13.540476190476191
+
+--------------------------------------------------------------------------------------------
+
+Lobster
+fdc1923fcd0>]
+max # nodes = 98 || mean # nodes = 53.62
+max # edges = 97 || mean # edges = 52.62
+INFO  | 2022-09-30 13:39:52,225 | gran_runner.py            | line 165  : Train/val/test = 80/20/20
+INFO  | 2022-09-30 13:39:52,227 | gran_runner.py            | line 178  : No Edges vs. Edges in training set = 68.49085794655414
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:03<00:00,  1.40it/s]
+INFO  | 2022-09-30 13:39:57,528 | gran_runner.py            | line 356  : Average test time per mini-batch = 0.7161707878112793
+-------------------------
+[0.97203134]
+...
+[0.9566061]
+-------------------------
+average edge # in test set:
+55.3
+average edge # in generated set:
+36.25
+-------------------------
+/localhome/kzahirni/anaconda3/envs/GRAN/lib/python3.7/site-packages/numpy/lib/npyio.py:528: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.
+  arr = np.asanyarray(arr)
+-------------------------
+[0.97625414]
+...
+[0.9566061]
+-------------------------
+average edge # in test set:
+49.8
+average edge # in generated set:
+36.25
+

@@ -1,3 +1,18 @@
+# import random
+#
+# import networkx as nx
+# import numpy as np
+# import torch
+# from scipy.sparse import *
+# from  Synthatic_graph_generator import *
+# # from util import *
+# import os
+# import pickle as pkl
+# import scipy.sparse as sp
+# import warnings
+#
+# import dgl as dgl
+#
 import random
 
 import networkx as nx
@@ -148,6 +163,8 @@ class Datasets():
 
         """
         'Initialization'
+        if Max_num!=0 and Max_num!=None:
+            list_adjs, graphlabels, list_Xs = self.remove_largergraphs( list_adjs, graphlabels, list_Xs, Max_num)
         self.set_diag_of_isol_Zer = set_diag_of_isol_Zer
         self.paading = padding
         self.list_Xs = list_Xs
@@ -184,7 +201,19 @@ class Datasets():
 
         self.featureList = None
 
+  def remove_largergraphs(self, adjs, labels, Xs, max_size):
+      processed_adjs = []
+      processed_labels = []
+      processed_Xs=[]
 
+      for i in range(len(adjs)):
+          if adjs[i].shape[0]<=max_size:
+              processed_adjs.append(adjs[i])
+              if labels!=None:
+                  processed_labels.append(labels[i])
+              if Xs!=None:
+                  processed_Xs.append(Xs[i])
+      return processed_adjs,processed_labels,processed_Xs
   def get(self):
       indexces = list(range(self.__len__()))
       return [self.processed_adjs[i] for i in indexces], [self.processed_Xs[i] for i in indexces]
@@ -221,7 +250,8 @@ class Datasets():
       return adj_s, x_s, num_nodes, subgraph_indexes
 
 
-
+  def get_max_degree(self):
+      return np.max([adj.sum(-1) for adj in self.processed_adjs])
   def processALL(self, self_for_none, bfs=None, ignore_isolate_nodes = False):
       self.adj_s = []
       self.x_s = []
@@ -443,7 +473,7 @@ class Datasets():
         # return self.processed_adjs[index], self.processed_Xs[index],torch.tensor(self.list_adjs[index].todense(), dtype=torch.float32)
         return self.processed_adjs[index], self.processed_Xs[index]
 # generate a list of graph
-def list_graph_loader( graph_type, _max_list_size=None, return_labels=False):
+def list_graph_loader( graph_type, _max_list_size=None, return_labels=False, limited_to=None):
   list_adj = []
   list_x =[]
   list_labels = []
@@ -499,6 +529,26 @@ def list_graph_loader( graph_type, _max_list_size=None, return_labels=False):
           list_labels.append(labels[i].cpu().item())
       graphs_to_writeOnDisk = [gr.toarray() for gr in list_adj]
       np.save('PTC_lattice_graph.npy', graphs_to_writeOnDisk, allow_pickle=True)
+  elif graph_type == "PROTEINS":
+      data = dgl.data.GINDataset(name='PROTEINS', self_loop=False)
+      graphs, labels = data.graphs, data.labels
+      for i, graph in enumerate(graphs):
+          if graph.adjacency_matrix().shape[0]<100:
+              list_adj.append(csr_matrix(graph.adjacency_matrix().to_dense().numpy()))
+              # list_x.append(graph.ndata['feat'])
+              list_x.append(None)
+              list_labels.append(labels[i].cpu().item())
+      # graphs_to_writeOnDisk = [gr.toarray() for gr in list_adj]
+      # np.save('PROTEINS.npy', graphs_to_writeOnDisk, allow_pickle=True)
+  elif graph_type == "QM9":
+      data = dgl.data.QM9Dataset(label_keys=['mu'])
+      for i, graph in enumerate(data):
+          # if i==1000:
+          #     break
+          adj = dgl.to_homo(graph[0]).adjacency_matrix().to_dense().numpy()
+          list_adj.append(scipy.sparse.csr_matrix(adj))
+          list_x.append(None)
+          # list_labels.append(labels[i].cpu().item())
 
   elif graph_type=="ogbg-molbbbp":
       # https://ogb.stanford.edu/docs/graphprop/
@@ -514,8 +564,8 @@ def list_graph_loader( graph_type, _max_list_size=None, return_labels=False):
           list_x.append(None)
           list_labels.append(label.cpu().item())
 
-      graphs_to_writeOnDisk = [gr.toarray() for gr in list_adj]
-      np.save('ogbg-molbbbp.npy', graphs_to_writeOnDisk, allow_pickle=True)
+      # graphs_to_writeOnDisk = [gr.toarray() for gr in list_adj]
+      # np.save('ogbg-molbbbp.npy', graphs_to_writeOnDisk, allow_pickle=True)
 
 
       # list_labels = [adj.sum() for adj in list_adj]
@@ -534,9 +584,15 @@ def list_graph_loader( graph_type, _max_list_size=None, return_labels=False):
         for j in range(10, 20):
             list_adj.append(nx.adjacency_matrix(nx.triangular_lattice_graph(i, j)))
             list_x.append(None)
-      graphs_to_writeOnDisk = [gr.toarray() for  gr in list_adj]
-      np.save('triangular_lattice_graph.npy', graphs_to_writeOnDisk, allow_pickle=True)
-
+      # graphs_to_writeOnDisk = [gr.toarray() for  gr in list_adj]
+      # np.save('triangular_lattice_graph.npy', graphs_to_writeOnDisk, allow_pickle=True)
+  elif graph_type=="small_triangular_grid":
+      for i in range(6, 12):
+        for j in range(6, 12):
+            list_adj.append(nx.adjacency_matrix(nx.triangular_lattice_graph(i, j)))
+            list_x.append(None)
+      # graphs_to_writeOnDisk = [gr.toarray() for  gr in list_adj]
+      # np.save('triangular_lattice_graph.npy', graphs_to_writeOnDisk, allow_pickle=True)
   elif graph_type=="fancy_grid":
       for i in range(4, 8):
         for j in range(4, 8):
@@ -565,8 +621,8 @@ def list_graph_loader( graph_type, _max_list_size=None, return_labels=False):
         list_adj.append(nx.adjacency_matrix(grid(350, 10)))
         list_x.append(None)
   elif graph_type=="small_grid":
-      for i in range(3, 6):
-        for j in range(3, 6):
+      for i in range(2, 3):
+        for j in range(2, 5):
             list_adj.append(nx.adjacency_matrix(grid(i, j)))
             list_x.append(None)
   elif graph_type=="huge_grids":
@@ -587,6 +643,39 @@ def list_graph_loader( graph_type, _max_list_size=None, return_labels=False):
             list_x.append(None)
             list_labels.append(len(communities)-2)
 
+  elif graph_type == "PVGAErandomGraphs":
+      for i in range(1000):
+          import randomGraphGen
+          # n = np.random.randint(low=20, high=40)
+          n = 20
+          graphGen = randomGraphGen.GraphGenerator()
+          list_x.append(None)
+          g, g_type = graphGen(n)
+          list_adj.append(nx.adjacency_matrix(g))
+          list_labels.append(g_type)
+      # graphs_to_writeOnDisk = [gr.toarray() for gr in list_adj]
+      # np.save('PVGAErandomGraphs.npy', graphs_to_writeOnDisk, allow_pickle=True)
+
+  # elif graph_type == "PVGAErandomGraphs_10000":
+  #     for i in range(10000):
+  #         import randomGraphGen
+  #         # n = np.random.randint(low=20, high=40)
+  #         n = 20
+  #         graphGen = randomGraphGen.GraphGenerator()
+  #         list_x.append(None)
+  #         list_adj.append(nx.adjacency_matrix(graphGen(n)))
+  #     graphs_to_writeOnDisk = [gr.toarray() for gr in list_adj]
+  #     np.save('PVGAErandomGraphs_10000.npy', graphs_to_writeOnDisk, allow_pickle=True)
+  # elif graph_type == "PVGAErandomGraphs_100000":
+  #     for i in range(100000):
+  #         import randomGraphGen
+  #         # n = np.random.randint(low=20, high=40)
+  #         n = 20
+  #         graphGen = randomGraphGen.GraphGenerator()
+  #         list_x.append(None)
+  #         list_adj.append(nx.adjacency_matrix(graphGen(n)))
+  #     graphs_to_writeOnDisk = [gr.toarray() for gr in list_adj]
+  #     np.save('PVGAErandomGraphs_100000.npy', graphs_to_writeOnDisk, allow_pickle=True)
   elif graph_type == 'small_lobster':
       graphs = []
       p1 = 0.7
@@ -627,15 +716,6 @@ def list_graph_loader( graph_type, _max_list_size=None, return_labels=False):
               list_x.append(None)
               count += 1
           seed_tmp += 1
-  elif graph_type == "QM9":
-      data = dgl.data.QM9Dataset(label_keys=['mu'])
-      for i, graph in enumerate(data):
-          # if i==1000:
-          #     break
-          adj = dgl.to_homo(graph[0]).adjacency_matrix().to_dense().numpy()
-          list_adj.append(scipy.sparse.csr_matrix(adj))
-          list_x.append(None)
-          # list_labels.append(labels[i].cpu().item())
   elif graph_type == 'lobster':
       graphs = []
       p1 = 0.7
@@ -657,8 +737,8 @@ def list_graph_loader( graph_type, _max_list_size=None, return_labels=False):
               count += 1
           seed_tmp += 1
       # writing the generated graph for benchmarking
-      graphs_to_writeOnDisk = [gr.toarray() for  gr in list_adj]
-      np.save('Lobster_adj.npy', graphs_to_writeOnDisk, allow_pickle=True)
+      # graphs_to_writeOnDisk = [gr.toarray() for  gr in list_adj]
+      # np.save('Lobster_adj.npy', graphs_to_writeOnDisk, allow_pickle=True)
 
   elif graph_type == "cora":
       import input_data
@@ -703,44 +783,43 @@ def list_graph_loader( graph_type, _max_list_size=None, return_labels=False):
         graph_labels=True)
     # args.max_prev_node = 230
 
-  # for j in len(list_adj):
-  #       p = list(range(list_adj[j].shape[0]))
-  #       np.random.shuffle(p)
-  #       for i in range(list_adj[j].shape[0]):
-  #           list_adj[j][:, i] = list_adj[j][p, i]
-  #       for i in range(list_adj[j].shape[0]):
-  #           list_adj[j][i, :] = list_adj[j][i, p]
 
-  temp = list(zip(list_adj, list_x))
-  # random.shuffle(temp)
-  list_adj, list_x = zip(*temp)
 
-  if _max_list_size!=None:
-      list_adj = list(list_adj[:_max_list_size])
-      list_x = list(list_x[:_max_list_size])
-  else:
-      list_adj = list(list_adj)
-      list_x = list(list_x)
-  # if generateSyntaticFeatures:
-  #     list_x= []
-  #     norm = np.max([adj.shape[0] for adj in list_adj])
-  #     for adj in list_adj:
-  #       list_x.append(node_festure_creator(adj, 0,0, Use_identity=True, norm = norm))
+  def return_subset(A,X,Y, limited_to):
+      indx = list(range(len(A)))
+      random.shuffle(indx)
+      A = [A[i] for i in indx]
+      X = [X[i] for i in indx]
+      if Y!=None and len(Y)!=0 : Y = [Y[i] for i in indx]
+
+      if limited_to != None:
+
+          A = A[:limited_to]
+          X = X[:limited_to]
+          if Y!=None and len(Y)!=0 : Y = Y[:limited_to]
+      return A,X,Y
+
+
   if return_labels ==True:
       if len(list_labels)==0:
           list_labels = None
-      return list_adj, list_x, list_labels
-  return list_adj, list_x
 
-def data_split(graph_lis, list_x=None):
+  return return_subset(list_adj, list_x, list_labels, limited_to)
+
+def data_split(graph_lis, list_x=None, list_label=None):
+    #suffle the data
     random.seed(123)
-
     index = list(range(len(graph_lis)))
     random.shuffle(index)
     graph_lis = [graph_lis[i] for i in index]
 
     if list_x!=None:
         list_x = [list_x[i] for i in index]
+
+    if list_label!=None:
+        list_label = [list_label[i] for i in index]
+
+    #----------------------------------------
 
     graph_test_len = len(graph_lis)
 
@@ -752,7 +831,13 @@ def data_split(graph_lis, list_x=None):
     if list_x!=None:
         list_x_train = list_x[0:int(0.8 * graph_test_len)]  # train
         list_x_test = list_x[int(0.8 * graph_test_len):]
-    return  graph_train, graph_test, list_x_train , list_x_test
+
+    list_label_train = list_label_test = None
+    if list_label!=None:
+        list_label_train = list_label[0:int(0.8 * graph_test_len)]  # train
+        list_label_test = list_label[int(0.8 * graph_test_len):]
+
+    return  graph_train, graph_test, list_x_train , list_x_test,list_label_train, list_label_test
 
 # list_adj, list_x = list_graph_loader("grid")
 # list_graph = Datasets(list_adj,self_for_none, None)
@@ -854,7 +939,30 @@ def BFS_Permute( adj_s, x_s, target_kelrnel_val):
 
 
 if __name__ == '__main__':
-    result=list_graph_loader("ogbg-molbbbp")
+    import numpy as np
+    from itertools import combinations
+    import plotter
+
+    result = list_graph_loader("PVGAErandomGraphs")
+    graph = np.load('C:\git\GRANon13\data/PVGAErandomGraphs.npy', allow_pickle=True)
+
+
+    result = list_graph_loader("PVGAErandomGraphs_100000")
+
+    for G in result[0]:
+        G = nx.from_numpy_matrix(G.toarray())
+        plotter.plotG(G,"DD")
+    # ----------------------------------------
+    import plotter
+    result = list_graph_loader("triangular_grid")
+    for G in result[0]:
+
+
+        G = nx.from_numpy_matrix(G.toarray())
+        plotter.plotG(G,"DD")
+    #----------------------------------------
+    result_ = list_graph_loader("QM9")
+    result=list_graph_loader("NCI1")
     import plotter
 
     for i, G in enumerate(result[0]):
@@ -884,13 +992,4 @@ if __name__ == '__main__':
 
         G = nx.from_numpy_matrix(G.toarray())
         plotter.plotG(G,"DD")
-#     # Parameters
-#     params = {'batch_size': 64,
-#               'shuffle': True,
-#               'num_workers': 1}
-#     max_epochs = 100
-#
-#     training_generator = torch.utils.data.DataLoader(list_graph, **params)
-#
-#     for iter, (adj_s, x_s) in enumerate(training_generator):
-#         pass
+
