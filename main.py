@@ -45,7 +45,7 @@ parser.add_argument('-encoder', dest="encoder_type", default="AvePool",
 parser.add_argument('-batchSize', dest="batchSize", default=200,
                     help="the size of each batch; the number of graphs is the mini batch")
 parser.add_argument('-UseGPU', dest="UseGPU", default=True, help="either use GPU or not if availabel")
-parser.add_argument('-model', dest="model", default="KernelAugmentedWithTotalNumberOfTriangles",
+parser.add_argument('-model', dest="model", default="graphVAE",
                     help="KernelAugmentedWithTotalNumberOfTriangles and kipf is the only option in this rep; NOTE KernelAugmentedWithTotalNumberOfTriangles=GraphVAE-MM and kipf=GraphVAE")
 parser.add_argument('-device', dest="device", default="cuda:0", help="Which device should be used")
 parser.add_argument('-task', dest="task", default="graphGeneration", help="only option in this rep is graphGeneration")
@@ -98,7 +98,7 @@ PATH = args.PATH  # the dir to save the with the best performance on validation 
 kernl_type = []
 
 #---------------------------------------------------------------------
-if args.model == "KernelAugmentedWithTotalNumberOfTriangles":
+if args.model == "KernelAugmentedWithTotalNumberOfTriangles" or args.model=="GraphVAE-MM":
     kernl_type = ["trans_matrix", "in_degree_dist", "out_degree_dist", "TotalNumberOfTriangles"]
 
 
@@ -156,7 +156,7 @@ if args.model == "KernelAugmentedWithTotalNumberOfTriangles":
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 50, 2000]
 #---------------------------------------------------------------------
 
-elif args.model == "kipf":
+elif args.model == "kipf" or args.model == "graphVAE":
     alpha = [1, 1]
     step_num = 0
 
@@ -182,7 +182,7 @@ logging.info("the selected device is :" + str(device))
 
 # setting the plots legend
 functions = ["Accuracy", "loss"]
-if args.model == "kernel" or args.model == "KernelAugmentedWithTotalNumberOfTriangles":
+if args.model == "kernel" or args.model == "KernelAugmentedWithTotalNumberOfTriangles" or args.model == "GraphVAE-MM":
     functions.extend(["Kernel" + str(i) for i in range(step_num)])
     functions.extend(kernl_type[1:])
 
