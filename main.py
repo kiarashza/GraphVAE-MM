@@ -31,7 +31,7 @@ parser.add_argument('-e', dest="epoch_number", default=20000, help="Number of Ep
 parser.add_argument('-v', dest="Vis_step", default=5000, help="at every Vis_step 'minibatch' the plots will be updated")
 parser.add_argument('-redraw', dest="redraw", default=False, help="either update the log plot each step")
 parser.add_argument('-lr', dest="lr", default=0.0003, help="model learning rate")
-parser.add_argument('-dataset', dest="dataset", default="mnist",
+parser.add_argument('-dataset', dest="dataset", default="zinc",
                     help="possible choices are:   wheel_graph,PTC, FIRSTMM_DB, star, triangular_grid, multi_community, NCI1, ogbg-molbbbp, IMDbMulti, grid, community, citeseer, lobster, DD")  # citeceer: ego; DD:protein
 parser.add_argument('-graphEmDim', dest="graphEmDim", default=1024, help="the dimention of graph Embeding LAyer; z")
 parser.add_argument('-graph_save_path', dest="graph_save_path", default=None,
@@ -101,6 +101,9 @@ kernl_type = []
 if args.model == "KernelAugmentedWithTotalNumberOfTriangles" or args.model=="GraphVAE-MM":
     kernl_type = ["trans_matrix", "in_degree_dist", "out_degree_dist", "TotalNumberOfTriangles"]
     if dataset=="mnist":
+        alpha = [1, 1, 1, 1, 1, 1, 1, 1, 20, 100]
+        step_num = 5
+    if dataset=="zinc":
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 20, 100]
         step_num = 5
     if dataset == "large_grid":

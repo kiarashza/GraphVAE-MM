@@ -734,9 +734,20 @@ def list_graph_loader( graph_type, _max_list_size=None, return_labels=False, lim
           in_1 = dataset_b[i].edge_index[0].detach().numpy()
           in_2 = dataset_b[i].edge_index[1].detach().numpy()
           valu = numpy.ones(len(in_2))
-          adj = scipy.sparse.csr_matrix((valu, (in_1, in_2)), shape=(dataset_b[0].num_nodes, dataset_b[0].num_nodes))
+          adj = scipy.sparse.csr_matrix((valu, (in_1, in_2)), shape=(dataset_b[i].num_nodes, dataset_b[i].num_nodes))
           list_adj.append(adj)
-          list_x.append(dataset_b[i].y)
+          list_x.append(None)
+  elif graph_type == "zinc":
+      import torch_geometric
+      dataset_b = torch_geometric.datasets.ZINC(root="data/geometric/MoleculeNet/zinc", subset=True)
+      list_adj = []
+      for i in range(len(dataset_b.data.y)):
+          in_1 = dataset_b[i].edge_index[0].detach().numpy()
+          in_2 = dataset_b[i].edge_index[1].detach().numpy()
+          valu = numpy.ones(len(in_2))
+          adj = scipy.sparse.csr_matrix((valu, (in_1, in_2)), shape=(dataset_b[i].num_nodes, dataset_b[i].num_nodes))
+          list_adj.append(adj)
+          list_x.append(None)
   elif graph_type == "cora":
       import input_data
       list_adj, list_x, _,_,_ = input_data.load_data(graph_type)
