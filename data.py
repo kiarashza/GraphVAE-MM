@@ -725,7 +725,7 @@ def list_graph_loader( graph_type, _max_list_size=None, return_labels=False, lim
       # writing the generated graph for benchmarking
       # graphs_to_writeOnDisk = [gr.toarray() for  gr in list_adj]
       # np.save('Lobster_adj.npy', graphs_to_writeOnDisk, allow_pickle=True)
-  elif graph_type=="geometric":
+  elif graph_type=="mnist":
       list_adj = []
       list_x = []
       import torch_geometric
