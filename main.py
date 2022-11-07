@@ -616,7 +616,7 @@ for epoch in range(epoch_number):
             model.eval()
             if task == "graphGeneration":
                 # print("generated vs Validation:")
-                EvalTwoSet(model, val_adj[:5000], graph_save_path, Save_generated=True, _f_name=epoch)
+                EvalTwoSet(model, val_adj[:1000], graph_save_path, Save_generated=True, _f_name=epoch)
 
                 if ((step + 1) % visulizer_step * 2):
                     torch.save(model.state_dict(), graph_save_path + "model_" + str(epoch) + "_" + str(batch))
