@@ -739,7 +739,7 @@ def list_graph_loader( graph_type, _max_list_size=None, return_labels=False, lim
           list_x.append(None)
   elif graph_type == "zinc":
       import torch_geometric
-      dataset_b = torch_geometric.datasets.ZINC(root="data/geometric/MoleculeNet/zinc", subset=True)
+      dataset_b = torch_geometric.datasets.ZINC(root="data/geometric/MoleculeNet/zinc", subset=False)
       list_adj = []
       for i in range(len(dataset_b.data.y)):
           in_1 = dataset_b[i].edge_index[0].detach().numpy()
