@@ -2,3 +2,4 @@ MMD_*
 generated_graph_train/
 !ReportedResult/*
 !mmd_rnn.py
+data/geometric/
