@@ -104,7 +104,7 @@ if args.model == "KernelAugmentedWithTotalNumberOfTriangles" or args.model=="Gra
         alpha = [1, 1, 1, 1, 1, 1, 1, 1, 20, 100]
         step_num = 5
     if dataset=="zinc":
-        alpha = [1, 1, 1, 1, 1, 1, 1, 1, 20, 100]
+        alpha = [1, 1, 1, 1, 1, 1, 1, 1, 4, 20]
         step_num = 5
     if dataset == "large_grid":
         step_num = 5 # s in s-step transition
@@ -609,14 +609,14 @@ for epoch in range(epoch_number):
                 target_set = [nx.from_numpy_matrix(val_adj[i].toarray()) for i in range(len(val_adj))]
                 target_set = [nx.Graph(G.subgraph(max(nx.connected_components(G), key=len))) for G in target_set if
                             not nx.is_empty(G)]
-                logging.info(mmd_eval(reconstructed_adj, target_set, diam=True))
+                logging.info(mmd_eval(reconstructed_adj, target_set[:len(reconstructed_adj)], diam=True))
 
 
 
             model.eval()
             if task == "graphGeneration":
                 # print("generated vs Validation:")
-                EvalTwoSet(model, val_adj, graph_save_path, Save_generated=True, _f_name=epoch)
+                EvalTwoSet(model, val_adj[:5000], graph_save_path, Save_generated=True, _f_name=epoch)
 
                 if ((step + 1) % visulizer_step * 2):
                     torch.save(model.state_dict(), graph_save_path + "model_" + str(epoch) + "_" + str(batch))
