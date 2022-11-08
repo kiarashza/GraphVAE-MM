@@ -28,7 +28,7 @@ keepThebest = False
 parser = argparse.ArgumentParser(description='Kernel VGAE')
 
 parser.add_argument('-e', dest="epoch_number", default=20000, help="Number of Epochs to train the model", type=int)
-parser.add_argument('-v', dest="Vis_step", default=5000, help="at every Vis_step 'minibatch' the plots will be updated")
+parser.add_argument('-v', dest="Vis_step", default=10000, help="at every Vis_step 'minibatch' the plots will be updated")
 parser.add_argument('-redraw', dest="redraw", default=False, help="either update the log plot each step")
 parser.add_argument('-lr', dest="lr", default=0.0003, help="model learning rate")
 parser.add_argument('-dataset', dest="dataset", default="zinc",
@@ -96,15 +96,14 @@ logging.info("KernelVGAE SETING: " + str(args))
 PATH = args.PATH  # the dir to save the with the best performance on validation data
 
 kernl_type = []
-
 #---------------------------------------------------------------------
 if args.model == "KernelAugmentedWithTotalNumberOfTriangles" or args.model=="GraphVAE-MM":
     kernl_type = ["trans_matrix", "in_degree_dist", "out_degree_dist", "TotalNumberOfTriangles"]
     if dataset=="mnist":
-        alpha = [1, 1, 1, 1, 1, 1, 1, 1, 20, 100]
+        alpha = [1, 1, 1, 1, 1, 1, 1, 1, 10, 50]
         step_num = 5
     if dataset=="zinc":
-        alpha = [1, 1, 1, 1, 1, 1, 1, 1, 4, 20]
+        alpha = [1, 1, 1, 1, 1, 1, 1, 1, 10, 50]
         step_num = 5
     if dataset == "large_grid":
         step_num = 5 # s in s-step transition
@@ -286,7 +285,7 @@ def test_(number_of_samples, model, graph_size, path_to_save_g, remove_self=True
 def EvalTwoSet(model, test_list_adj, graph_save_path, Save_generated=True, _f_name=None, onlyTheBigestConCom = True):
     generated_graphs = test_(1, model, [x.shape[0] for x in test_list_adj], graph_save_path, save_graphs=Save_generated)
     graphs_to_writeOnDisk = [nx.to_numpy_array(G) for G in generated_graphs]
-    if (onlyTheBigestConCom!=False):
+    if (onlyTheBigestConCom==False):
         if Save_generated:
             np.save(graph_save_path + 'generatedGraphs_adj_' + str(_f_name) + '.npy', graphs_to_writeOnDisk,
                     allow_pickle=True)
@@ -300,9 +299,12 @@ def EvalTwoSet(model, test_list_adj, graph_save_path, Save_generated=True, _f_na
     logging.info("result for subgraph with maximum connected componnent")
     generated_graphs = [nx.Graph(G.subgraph(max(nx.connected_components(G), key=len))) for G in generated_graphs if
                         not nx.is_empty(G)]
-    logging.info(
-        mmd_eval(generated_graphs, [nx.from_numpy_matrix(graph.toarray()) for graph in test_list_adj], diam=True))
 
+    statistic_   = mmd_eval(generated_graphs, [nx.from_numpy_matrix(graph.toarray()) for graph in test_list_adj], diam=True)
+    # if writeThem_in!=None:
+    #     with open(writeThem_in+'MMD.log', 'w') as f:
+    #         f.write(statistic_)
+    logging.info(statistic_)
     if Save_generated:
         graphs_to_writeOnDisk = [nx.to_numpy_array(G) for G in generated_graphs]
         np.save(graph_save_path + 'Single_comp_generatedGraphs_adj_' + str(_f_name) + '.npy', graphs_to_writeOnDisk,
@@ -310,7 +312,7 @@ def EvalTwoSet(model, test_list_adj, graph_save_path, Save_generated=True, _f_na
 
         graphs_to_writeOnDisk = [G.toarray() for G in test_list_adj]
         np.save(graph_save_path + 'testGraphs_adj_.npy', graphs_to_writeOnDisk, allow_pickle=True)
-
+    return  statistic_
 
 def get_subGraph_features(org_adj, subgraphs_indexes, kernel_model):
     subgraphs = []
@@ -609,19 +611,21 @@ for epoch in range(epoch_number):
                 target_set = [nx.from_numpy_matrix(val_adj[i].toarray()) for i in range(len(val_adj))]
                 target_set = [nx.Graph(G.subgraph(max(nx.connected_components(G), key=len))) for G in target_set if
                             not nx.is_empty(G)]
-                logging.info(mmd_eval(reconstructed_adj, target_set[:len(reconstructed_adj)], diam=True))
+                reconstruc_MMD_loss = mmd_eval(reconstructed_adj, target_set[:len(reconstructed_adj)], diam=True)
+                logging.info(reconstruc_MMD_loss)
 
-
-
+            #todo: instead of printing diffrent level of logging shoud be used
             model.eval()
             if task == "graphGeneration":
                 # print("generated vs Validation:")
-                EvalTwoSet(model, val_adj[:1000], graph_save_path, Save_generated=True, _f_name=epoch)
+                mmd_res= EvalTwoSet(model, val_adj[:1000], graph_save_path, Save_generated=True, _f_name=epoch)
+                with open(graph_save_path + '_MMD.log', 'a') as f:
+                        f.write(str(step)+" @ loss @ , "+str(loss.item())+" , @ Reconstruction @ , "+reconstruc_MMD_loss+" , @ Val @ , " +mmd_res+"\n")
 
                 if ((step + 1) % visulizer_step * 2):
                     torch.save(model.state_dict(), graph_save_path + "model_" + str(epoch) + "_" + str(batch))
             stop = timeit.default_timer()
-            print("trainning time at this epoch:", str(stop - start))
+            # print("trainning time at this epoch:", str(stop - start))
             model.train()
             # if reconstruction_loss.item()<0.051276 and not swith:
             #     alpha[-1] *=2
