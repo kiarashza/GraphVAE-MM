@@ -1,0 +1,47 @@
+Pillow==7.2.0
+Pygments==2.7.1
+backcall==0.2.0
+certifi==2020.6.20
+chardet==3.0.4
+cycler==0.10.0
+decorator==4.4.2
+dgl==0.4.3.post2
+future==0.18.2
+idna==2.10
+ipython==7.18.1
+ipython-genutils==0.2.0
+jedi==0.17.2
+joblib==0.16.0
+kiwisolver==1.2.0
+matplotlib==3.3.2
+mpmath==1.1.0
+networkx==2.5
+numpy==1.19.2
+parso==0.7.1
+pexpect==4.8.0
+pickleshare==0.7.5
+pip==19.0.3
+powerlaw==1.4.6
+prompt-toolkit==3.0.7
+ptyprocess==0.6.0
+pyparsing==2.4.7
+python-dateutil==2.8.1
+python-igraph==0.8.2
+requests==2.24.0
+scikit-learn==0.23.2
+scipy==1.5.2
+setuptools==40.8.0
+six==1.15.0
+sklearn==0.0
+texttable==1.6.3
+threadpoolctl==2.1.0
+torch==1.6.0
+torchvision==0.7.0
+traitlets==5.0.4
+urllib3==1.25.10
+wcwidth==0.2.5
+xnetwork==0.9
+#conda install pytorch==1.6.0 torchvision==0.7.0 cudatoolkit=10.2 -c pytorch
+#conda install -c dglteam dgl==0.4.3
+#conda install -c intel scikit-learn=0.23.2
+#conda install -c anaconda ipython_genutils==0.2.0
