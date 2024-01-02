@@ -2,7 +2,7 @@
 This is the original implementation of Micro and Macro Level Graph Modeling for Graph Variational Auto-Encoders.
 
 ## Code Overview
-main.py includes the training pipeline and also micro-macro objective functions implementation. Source codes for loading real graph datasets and generating synthetic graphs are included in data.py. All the Python packages used in our experiments are provided in environment.yml. Generated graph samples for each of the datasets are provided in the "ReportedResult/" directory,both in the pickle and png format. This directory also includes the log files and hyperparameters details used to train the GraphVAE-MM on each of the datasets.
+main.py includes the training pipeline and also micro-macro objective functions implementation. Source codes for loading real graph datasets and generating synthetic graphs are included in data.py. All the Python packages used in our experiments are provided in requirements.yml. Generated graph samples for each of the datasets are provided in the "ReportedResult/" directory,both in the pickle and png format. This directory also includes the log files and hyperparameters details used to train the GraphVAE-MM on each of the datasets.
 
 ## GraphVAE
 The argument "-model", line 48 of main.py, determines which model is running, either "GraphVAE" or "GraphVAE-MM".
